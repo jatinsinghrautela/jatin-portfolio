@@ -1,0 +1,7 @@
+'use client';
+import {usePathname} from 'next/navigation';
+import {createContext,useContext,useState,useEffect,useCallback} from 'react';
+import {defaultContent,type SiteContent} from '../lib/content-model';
+const Context=createContext(defaultContent);
+export function ContentProvider({initial,children}:{initial:SiteContent;children:React.ReactNode}){const[content,setContent]=useState(initial);const pathname=usePathname();useEffect(()=>{setContent(initial)},[initial]);useEffect(()=>{const refresh=()=>{fetch('/api/content',{cache:'no-store'}).then(r=>r.ok?r.json() as Promise<{content?:SiteContent}>:null).then(v=>{if(v?.content)setContent(v.content)}).catch(()=>{})};window.addEventListener('portfolio-content-updated',refresh);return()=>window.removeEventListener('portfolio-content-updated',refresh)},[]);useEffect(()=>{const project=content.projects.find(p=>pathname===`/projects/${p.id}`);document.title=pathname==='/cms'?`Owner CMS | ${content.identity.name}`:project?`${project.title} | ${content.identity.name}`:content.identity.siteTitle;let icon=document.querySelector<HTMLLinkElement>('link[rel="icon"]');if(!icon){icon=document.createElement('link');icon.rel='icon';document.head.appendChild(icon)}icon.href=content.identity.favicon},[content.identity,content.projects,pathname]);return <Context.Provider value={content}>{children}</Context.Provider>}
+export function useSiteContent(){const content=useContext(Context);const copy=useCallback((key:string,fallback:string)=>content.copy[key]??fallback,[content.copy]);return {content,copy}}

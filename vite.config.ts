@@ -45,6 +45,7 @@ export default defineConfig(async ({ command }) => {
 
   return {
     server: {
+      fs: { deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "**/.dev.vars*", "**/outputs/**", "**/.wrangler/**", "**/.sites-runtime/**"] },
       ...(managedLinux
         ? { host: "0.0.0.0", allowedHosts: ["terminal.local"] }
         : {}),

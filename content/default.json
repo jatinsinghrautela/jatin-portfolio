@@ -1,0 +1,770 @@
+{
+  "version": 1,
+  "identity": {
+    "name": "Jatin Singh Rautela",
+    "role": "DevOps Engineer",
+    "location": "Bengaluru, Karnataka, India",
+    "siteTitle": "Jatin Singh Rautela | DevOps Engineer",
+    "description": "DevOps engineer specializing in cloud infrastructure, automated delivery, and observability.",
+    "favicon": "/favicon.svg",
+    "resume": "/Jatin_Singh_Rautela_Resume.pdf"
+  },
+  "links": {
+    "github": "https://github.com/jatinsinghrautela",
+    "email": "mailto:contact@jatinsinghrautela.com",
+    "linkedin": "https://www.linkedin.com/in/jatinsinghrautela/",
+    "instagram": "https://www.instagram.com/j_s_rautela",
+    "certificationVerification": "https://www.credly.com/badges/841df416-76de-472c-979d-b87fb7bfae72/linked_in_profile"
+  },
+  "navigation": [
+    [
+      "home",
+      "/",
+      "Home"
+    ],
+    [
+      "projects",
+      "/projects",
+      "Projects"
+    ],
+    [
+      "experience",
+      "/experience",
+      "Experience"
+    ],
+    [
+      "skills",
+      "/skills",
+      "Skills"
+    ],
+    [
+      "certifications",
+      "/certifications",
+      "Certifications"
+    ],
+    [
+      "about",
+      "/about",
+      "About"
+    ],
+    [
+      "contact",
+      "/contact",
+      "Contact"
+    ]
+  ],
+  "projects": [
+    {
+      "id": "opsradar",
+      "title": "OpsRadar",
+      "category": "DevOps",
+      "tags": [
+        "React",
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "Docker Compose"
+      ],
+      "description": "A lightweight alert bridge for Windows and Linux hosts where a full observability stack is too much.",
+      "story": "OpsRadar brings host alerts and heartbeats into one self-hosted web console. Thin Node.js CLI agents report to an Express API, while a React admin interface provides inventory management, scoped alerts, and in-app notifications. The project is being presented under its new name, OpsRadar; the reference implementation was named LongShot / AlertOn.",
+      "image": "/images/opsradar-alert-bridge.webp",
+      "imageAlt": "Conceptual illustration of host agents sending orange heartbeat signals to a central alert console and database",
+      "features": [
+        "Alert ingest, resolution, and heartbeats from Node-only agents on Windows or Linux.",
+        "Per-server API keys for agents, JWT sign-in for the web console, and optional authenticator-based TOTP.",
+        "Inventory organized by country, application, group, and server, with scoped user visibility.",
+        "Configurable alert retention and heartbeat-based detection of unavailable hosts.",
+        "Docker Compose control plane with PostgreSQL persistence; systemd and Windows service setup for agents."
+      ],
+      "architecture": [
+        "Node CLI agents",
+        "Express API",
+        "PostgreSQL",
+        "React console"
+      ],
+      "plannedRepository": "https://github.com/jatinsinghrautela/OpsRadar"
+    },
+    {
+      "id": "roach",
+      "title": "Roach",
+      "category": "Development",
+      "tags": [
+        "React",
+        "Redux Toolkit",
+        "Express",
+        "MongoDB",
+        "Docker Compose"
+      ],
+      "description": "A shop inventory application that connects product records, QR scanning, stock movements, and checkout.",
+      "story": "Roach gives each shop a private workspace for its products, stock movements, invoices, and alerts. A React front end is served through Nginx, which forwards API and image requests to Express. MongoDB stores the inventory and sales records, while Docker Compose brings the services together.",
+      "image": "/images/roach-inventory.webp",
+      "imageAlt": "Conceptual illustration of product shelves, a scanner, an inventory panel, and a checkout receipt",
+      "features": [
+        "Product records with photos or camera stills, prices, costs, quantities, and reorder levels.",
+        "Downloadable product QR labels, camera scanning, and name or SKU search as a fallback.",
+        "Restocking, multi-item checkout, stock movement history, and invoices with sale-time line snapshots.",
+        "Sales reports for units, revenue, cost, and profit, plus low-stock and out-of-stock notifications.",
+        "Shop-scoped accounts, a 30-day trial, and operator-recorded offline payments that extend access without deleting data."
+      ],
+      "architecture": [
+        "React + Redux",
+        "Nginx",
+        "Express API",
+        "MongoDB"
+      ],
+      "plannedRepository": "https://github.com/jatinsinghrautela/Roach"
+    }
+  ],
+  "caseStudies": {
+    "opsradar": {
+      "subtitle": "A small signal path. A clearer operational picture.",
+      "challenge": "Legacy and resource-constrained hosts still need a way to report failures. A lightweight agent can send actionable alerts without installing a metrics database or a full observability stack on each machine.",
+      "nodes": [
+        [
+          "HOSTS",
+          "Node CLI agents",
+          "Windows / Linux"
+        ],
+        [
+          "INGEST",
+          "Express API",
+          "Per-server API key"
+        ],
+        [
+          "PERSISTENCE",
+          "PostgreSQL",
+          "Alerts · inventory · retention"
+        ],
+        [
+          "CONSOLE",
+          "React web UI",
+          "JWT · scoped visibility"
+        ]
+      ],
+      "flow": "Agents send alerts, resolutions, and heartbeats to the API. The API persists records in PostgreSQL. The React console reads scoped data through the API; it does not connect to the database directly.",
+      "connections": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "previews": [
+        "Alert inbox",
+        "Host inventory",
+        "Notification feed"
+      ],
+      "takeaways": [
+        [
+          "Design for the host",
+          "Keep the agent Node-only and move persistence and administration to the control plane. This keeps deployment practical on constrained hosts."
+        ],
+        [
+          "Separate trust boundaries",
+          "Per-server ingest keys and web JWT sessions serve different callers. Keeping those paths distinct makes access easier to reason about."
+        ],
+        [
+          "Liveness needs context",
+          "Heartbeat timing and retention are operational choices. A missing heartbeat is a host-liveness signal, not a complete diagnosis of the application."
+        ]
+      ],
+      "technologies": [
+        [
+          "React + MUI",
+          "Web console and administration"
+        ],
+        [
+          "Node.js CLI",
+          "Agent heartbeats, alerts, and resolution"
+        ],
+        [
+          "Express + Sequelize",
+          "API boundary and persistence access"
+        ],
+        [
+          "PostgreSQL",
+          "Durable alert and inventory records"
+        ],
+        [
+          "Docker Compose",
+          "API, UI, and database services"
+        ],
+        [
+          "systemd / Windows services",
+          "Long-running host agent setup"
+        ]
+      ],
+      "scope": "Alerts and host liveness are the focus. Time-series metrics, log indexing, and distributed tracing are outside this implementation."
+    },
+    "roach": {
+      "subtitle": "From a product on a shelf to a recorded sale.",
+      "challenge": "A shop needs a consistent record of what is on hand, what moved, and what sold. Roach connects product identification with stock changes and invoices while keeping each shop’s records separate.",
+      "nodes": [
+        [
+          "BROWSER",
+          "React + Redux",
+          "Inventory · scan · checkout"
+        ],
+        [
+          "GATEWAY",
+          "Nginx",
+          "One origin · /api · /uploads"
+        ],
+        [
+          "APPLICATION",
+          "Express API",
+          "Owner checks · session cookie"
+        ],
+        [
+          "PERSISTENCE",
+          "MongoDB",
+          "Products · movements · invoices"
+        ]
+      ],
+      "flow": "The browser reaches Nginx, which serves the React app and forwards API and image requests to Express. Express checks access and ownership before reading or changing MongoDB records. Images live in upload storage or optional Cloudinary.",
+      "connections": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "previews": [
+        "Inventory dashboard",
+        "Scan & restock",
+        "Checkout & invoices"
+      ],
+      "takeaways": [
+        [
+          "Keep stock changes traceable",
+          "Restock, adjustment, and checkout movements create a history behind the current quantity rather than leaving only an unexplained number."
+        ],
+        [
+          "Preserve the sale",
+          "Invoice lines retain the name, SKU, prices, and cost at checkout time, so later product edits do not redefine a past sale."
+        ],
+        [
+          "Treat QR as identification",
+          "A product QR code identifies an item. Ownership and account-access checks still belong at the API boundary."
+        ]
+      ],
+      "technologies": [
+        [
+          "React 18 + Redux Toolkit",
+          "Interface and client state"
+        ],
+        [
+          "React Router",
+          "Inventory and account navigation"
+        ],
+        [
+          "Express + Mongoose",
+          "Application routes and data models"
+        ],
+        [
+          "MongoDB",
+          "Shop-scoped records and invoices"
+        ],
+        [
+          "Nginx + Docker Compose",
+          "Single-origin deployment and services"
+        ],
+        [
+          "Camera / QR workflows",
+          "Product identification and stock actions"
+        ]
+      ],
+      "scope": "Payment extensions are recorded offline by an operator. There is no card-payment gateway. Email features require SMTP configuration."
+    }
+  },
+  "experience": [
+    {
+      "date": "Jul 2025 — Present",
+      "title": "Senior Engineer",
+      "label": "CURRENT ROLE",
+      "detail": "Improving the systems behind production delivery.",
+      "points": [
+        "Optimized Kubernetes clusters and Azure infrastructure for scalability and reliability.",
+        "Implemented Azure DevOps and ArgoCD pipelines, increasing deployment frequency by 40%.",
+        "Managed AWS production applications and Prometheus / Grafana monitoring for MTN.",
+        "Mentored junior engineers on SRE practices and incident response, reducing escalations by 20%."
+      ],
+      "tools": [
+        "Kubernetes",
+        "Azure",
+        "AWS",
+        "ArgoCD"
+      ],
+      "flow": [
+        "Configure",
+        "Deploy",
+        "Observe"
+      ]
+    },
+    {
+      "date": "Dec 2023 — Jun 2025",
+      "title": "Engineer",
+      "label": "CLOUD & AUTOMATION",
+      "detail": "Turning recurring operations into repeatable workflows.",
+      "points": [
+        "Managed AKS, App Services, VMs, and AWS infrastructure for production workloads.",
+        "Automated operations with Bash and Azure tools, saving approximately 15 hours per week.",
+        "Troubleshot containerized environments and collaborated on root cause resolution."
+      ],
+      "tools": [
+        "AKS",
+        "Bash",
+        "Docker",
+        "Azure"
+      ],
+      "flow": [
+        "Inspect",
+        "Automate",
+        "Resolve"
+      ]
+    },
+    {
+      "date": "Aug 2023 — Nov 2023",
+      "title": "Trainee",
+      "label": "THE FOUNDATION",
+      "detail": "Learning how cloud services work in practice.",
+      "points": [
+        "Gained hands-on experience with Azure setup, ticketing workflows, and monitoring configuration."
+      ],
+      "tools": [
+        "Azure",
+        "Monitoring",
+        "Operations"
+      ],
+      "flow": [
+        "Learn",
+        "Build",
+        "Improve"
+      ]
+    }
+  ],
+  "practices": [
+    {
+      "title": "Automate the repeatable",
+      "detail": "Bash and Azure automation reduced recurring manual work by approximately 15 hours per week.",
+      "icon": "⌘",
+      "tools": "BASH / AZURE"
+    },
+    {
+      "title": "Make delivery dependable",
+      "detail": "Azure DevOps and ArgoCD pipelines improved deployment frequency by 40% at Comviva.",
+      "icon": "↗",
+      "tools": "CI/CD / GITOPS"
+    },
+    {
+      "title": "Make operations visible",
+      "detail": "Prometheus and Grafana monitoring helped surface service health and guide incident response.",
+      "icon": "◎",
+      "tools": "PROMETHEUS / GRAFANA"
+    }
+  ],
+  "toolbox": [
+    "Linux",
+    "AWS",
+    "Azure",
+    "Kubernetes",
+    "Terraform",
+    "ArgoCD"
+  ],
+  "skills": [
+    [
+      "01",
+      "Cloud & infrastructure",
+      [
+        "AWS",
+        "Azure",
+        "Terraform",
+        "Linux"
+      ]
+    ],
+    [
+      "02",
+      "Containers & delivery",
+      [
+        "Kubernetes",
+        "Docker",
+        "OpenShift",
+        "ArgoCD",
+        "Azure DevOps"
+      ]
+    ],
+    [
+      "03",
+      "Observability",
+      [
+        "Prometheus",
+        "Grafana"
+      ]
+    ],
+    [
+      "04",
+      "Scripting & development",
+      [
+        "Bash",
+        "Python",
+        "Java",
+        "JavaScript",
+        "React Native",
+        "Node.js",
+        "MongoDB",
+        "Oracle SQL",
+        "MySQL",
+        "Git"
+      ]
+    ]
+  ],
+  "terminals": {
+    "about": [
+      {
+        "command": "whoami",
+        "output": "Jatin Singh Rautela · DevOps Engineer"
+      },
+      {
+        "command": "cat mindset.txt",
+        "output": "Make it repeatable. Make it observable.\nLeave the next engineer a clearer system."
+      },
+      {
+        "command": "cat beyond-work.txt",
+        "output": "OpsRadar · lightweight operational alerting\nRoach · inventory workflows for shops"
+      }
+    ],
+    "services": [
+      {
+        "command": "cat capabilities.txt",
+        "output": "AWS + Azure infrastructure\nKubernetes operations · Terraform automation"
+      },
+      {
+        "command": "cat delivery.txt",
+        "output": "Azure DevOps + ArgoCD\nA repeatable path from change to deployment."
+      },
+      {
+        "command": "cat operations.txt",
+        "output": "Prometheus + Grafana\nUseful signals. Clearer incident response."
+      }
+    ]
+  },
+  "workflows": {
+    "opsradar": [
+      {
+        "name": "Alert lifecycle",
+        "title": "From host signal to an actionable alert.",
+        "steps": [
+          [
+            "Detect",
+            "An engineer or host process reports an operational issue."
+          ],
+          [
+            "Authenticate",
+            "The agent submits the alert with its per-server API key."
+          ],
+          [
+            "Review",
+            "The API stores the record and the console presents scoped alerts."
+          ],
+          [
+            "Resolve",
+            "A resolution updates the alert lifecycle."
+          ]
+        ]
+      },
+      {
+        "name": "Host liveness",
+        "title": "Know when a host stops checking in.",
+        "steps": [
+          [
+            "Run",
+            "A Node agent runs on Windows or Linux."
+          ],
+          [
+            "Heartbeat",
+            "Periodic heartbeats reach the control plane."
+          ],
+          [
+            "Evaluate",
+            "The service checks the elapsed time since the last beat."
+          ],
+          [
+            "Surface",
+            "The console exposes host availability to operators."
+          ]
+        ]
+      },
+      {
+        "name": "Operator workflow",
+        "title": "Give operational signals the right context.",
+        "steps": [
+          [
+            "Organize",
+            "Arrange inventory by country, application, group, and server."
+          ],
+          [
+            "Scope",
+            "User access determines which alerts are visible."
+          ],
+          [
+            "Review",
+            "Use the alert inbox and notification feed."
+          ],
+          [
+            "Retain",
+            "Apply configured retention to stored alerts."
+          ]
+        ]
+      }
+    ],
+    "roach": [
+      {
+        "name": "Product to shelf",
+        "title": "Create a product record that is ready to use.",
+        "steps": [
+          [
+            "Record",
+            "Add the product, image, price, cost, and starting quantity."
+          ],
+          [
+            "Identify",
+            "Generate a product QR label."
+          ],
+          [
+            "Find",
+            "Scan the label or search by name or SKU."
+          ],
+          [
+            "Restock",
+            "Add units and retain a stock movement record."
+          ]
+        ]
+      },
+      {
+        "name": "Checkout to invoice",
+        "title": "Connect each sale with its stock movement.",
+        "steps": [
+          [
+            "Select",
+            "Collect products and quantities in checkout."
+          ],
+          [
+            "Validate",
+            "Check available stock before recording the sale."
+          ],
+          [
+            "Invoice",
+            "Store product and price snapshots for each invoice line."
+          ],
+          [
+            "Update",
+            "Reduce stock and record checkout movements."
+          ]
+        ]
+      },
+      {
+        "name": "Stock to insight",
+        "title": "Make the inventory record useful after the sale.",
+        "steps": [
+          [
+            "Track",
+            "Keep restock, adjustment, and checkout movements."
+          ],
+          [
+            "Notify",
+            "Surface low-stock and out-of-stock notifications."
+          ],
+          [
+            "Report",
+            "Review units sold, revenue, cost, and profit."
+          ],
+          [
+            "Act",
+            "Use the records to plan replenishment."
+          ]
+        ]
+      }
+    ]
+  },
+  "copy": {
+    "portfolio.001": "DEVOPS",
+    "portfolio.002": "Complex systems.",
+    "portfolio.003": "Clear thinking.",
+    "portfolio.004": "I’m Jatin Singh Rautela, a DevOps engineer at Comviva. I build reliable cloud infrastructure, automate delivery, and make production systems easier to operate.",
+    "portfolio.005.href": "/projects",
+    "portfolio.006": "Explore projects ",
+    "portfolio.007.href": "/about",
+    "portfolio.008": "Meet the engineer ",
+    "portfolio.009": "JATIN SINGH RAUTELA / BENGALURU, INDIA",
+    "portfolio.010": "MY DAILY",
+    "portfolio.011": "TOOLBOX",
+    "portfolio.012": "01 / PERSONAL PROJECTS",
+    "portfolio.013": "Systems with a story.",
+    "portfolio.014.href": "/projects",
+    "portfolio.015": "All projects ↗",
+    "portfolio.016.href": "/experience",
+    "portfolio.017": "THE JOURNEY",
+    "portfolio.018": "Experience in production ↗",
+    "portfolio.019": "From cloud operations to engineering delivery.",
+    "portfolio.020.href": "/skills",
+    "portfolio.021": "THE PRACTICE",
+    "portfolio.022": "Tools of the trade ↗",
+    "portfolio.023": "Cloud, containers, automation, and observability.",
+    "portfolio.024": "GOOD SYSTEMS START WITH A CONVERSATION",
+    "portfolio.025": "Let’s build what’s next.",
+    "portfolio.026.href": "/contact",
+    "portfolio.027": "Start a conversation ↗",
+    "portfolio.028": "01 / PROJECT EXPLORER",
+    "portfolio.029": "Under the hood.",
+    "portfolio.030": "Beyond the interface.",
+    "portfolio.031": "Personal projects exploring lightweight alerting and inventory workflows, developed independently of my work at Comviva.",
+    "portfolio.032": "03 / SAY HELLO",
+    "portfolio.033": "Great things start",
+    "portfolio.034": "with a hello.",
+    "portfolio.035": "Let’s talk about reliable infrastructure, delivery automation, or your next engineering challenge. Based in Bengaluru, India.",
+    "profile-pages.001.label": "THE PERSON BEHIND THE SYSTEMS",
+    "profile-pages.002.title": "Curiosity, put to work.",
+    "profile-pages.003.description": "I’m Jatin Singh Rautela, a DevOps engineer based in Bengaluru. I enjoy connecting infrastructure with the software and people it supports.",
+    "profile-pages.004.src": "/images/cloud-ecosystem.webp",
+    "profile-pages.005.alt": "Conceptual glass servers connected by orange light",
+    "profile-pages.006": "CONNECTED SYSTEMS / CLEAR THINKING",
+    "profile-pages.007": "Build thoughtfully.",
+    "profile-pages.008": "Keep improving.",
+    "profile-pages.009": "My work at Comviva spans cloud operations, Kubernetes, automated delivery, and production monitoring. Outside work, personal projects like OpsRadar and Roach keep me close to the application side of engineering.",
+    "profile-pages.010": "I value understandable automation, useful monitoring, and learning through hands-on work.",
+    "profile-pages.011.href": "/experience",
+    "profile-pages.012": "Follow my journey ↗",
+    "profile-pages.013.label": "EXPERIENCE / COMVIVA TECHNOLOGIES",
+    "profile-pages.014.title": "A journey in production.",
+    "profile-pages.015.description": "From cloud operations to improving delivery and reliability. Three roles, one continuous learning curve at Comviva in Bengaluru.",
+    "profile-pages.016.aria-label": "Work experience timeline",
+    "profile-pages.017": "Comviva Technologies Ltd",
+    "profile-pages.018.aria-label": "Illustrative workflow animation",
+    "profile-pages.019": "Let’s talk infrastructure.",
+    "profile-pages.020.href": "/contact",
+    "profile-pages.021": "Get in touch ↗",
+    "profile-pages.022.label": "SKILLS / THE ENGINEERING TOOLKIT",
+    "profile-pages.023.title": "Tools with a purpose.",
+    "profile-pages.024.description": "The technologies I bring to cloud infrastructure, delivery automation, observability, and software development.",
+    "site-header.001.aria-label": "Main navigation",
+    "site-header.002.href": "/",
+    "site-header.003": "JR",
+    "site-footer.001": "GitHub",
+    "site-footer.002": "LinkedIn",
+    "site-footer.003": "Instagram",
+    "site-footer.004": "Email",
+    "site-footer.005.href": "/",
+    "site-footer.006": "Reliable systems. Thoughtful automation.",
+    "site-footer.007": "LET’S CONNECT",
+    "site-footer.008.href": "/contact",
+    "site-footer.009": "Start a conversation ↗",
+    "site-footer.011": "Download resume ↓",
+    "studio.001.aria-label": "Animated glass infrastructure architecture",
+    "studio.002.src": "/images/cloud-ecosystem.webp",
+    "studio.003.alt": "Original conceptual glass cloud infrastructure with glowing orange connections",
+    "studio.004": "cloud",
+    "studio.005": "infra",
+    "studio.006": "code",
+    "studio.007": " infrastructure as code",
+    "studio.008": "↗ build · ship · observe",
+    "studio.009": "FIG. 01 / SYSTEMS IN MOTION",
+    "studio.010": "CLOUD / CONNECTED",
+    "studio.011": "HOW I APPLY THE TOOLS",
+    "studio.012": "From tooling",
+    "studio.013": "to useful outcomes.",
+    "studio.014": "Engineering practices grounded",
+    "studio.015": "in my professional experience.",
+    "typing-terminal.001": "   ",
+    "typing-terminal.002": "JATIN / CLOUD · DELIVERY · OBSERVABILITY",
+    "project-card.001": "COMMIT",
+    "project-card.002": "BUILD",
+    "project-card.003": "DEPLOY",
+    "project-card.004": "CONCEPT ART / ",
+    "project-card.005": "PERSONAL PROJECT",
+    "project-card.006": "Explore details ",
+    "project-detail.001.aria-label": "Choose project workflow",
+    "project-detail.002": "Project not found.",
+    "project-detail.003.href": "/projects",
+    "project-detail.004": "All projects ↗",
+    "project-detail.005.href": "/projects",
+    "project-detail.006": "← All projects",
+    "project-detail.007": "PERSONAL PROJECT / CASE STUDY",
+    "project-detail.008": "ORIGINAL CONCEPT ART",
+    "project-detail.009": "On this page ",
+    "project-detail.010": "INSIDE THE PROJECT",
+    "project-detail.011.aria-label": "Case study sections",
+    "project-detail.012": "Back to top ↑",
+    "project-detail.013": "01 / OVERVIEW",
+    "project-detail.014": "The idea, in context.",
+    "project-detail.015": "THE PROBLEM",
+    "project-detail.016": "What it does",
+    "project-detail.017": "02 / ARCHITECTURE",
+    "project-detail.018": "Follow the signal.",
+    "project-detail.019": "A view of the main components and their connections.",
+    "project-detail.020": "03 / WORKFLOWS",
+    "project-detail.021": "A closer look at the workflow.",
+    "project-detail.022": "Follow the product journeys, from the first action to the recorded outcome.",
+    "project-detail.023": "04 / TECHNOLOGIES",
+    "project-detail.024": "Every tool has a role.",
+    "project-detail.025": "05 / LEARNINGS",
+    "project-detail.026": "Engineering takeaways.",
+    "project-detail.027": "Design lessons illustrated by this project’s architecture and workflows.",
+    "project-detail.028": "GITHUB / COMING SOON",
+    "project-detail.029": "Planned repository for ",
+    "project-detail.030": "Placeholder — repository not published yet.",
+    "project-detail.031": "KEEP EXPLORING",
+    "contact-form.001": "Let’s connect.",
+    "contact-form.002": "Bengaluru, Karnataka, India",
+    "contact-form.004": "Download resume ↓",
+    "contact-form.005": "YOUR NAME",
+    "contact-form.006.placeholder": "How should I call you?",
+    "contact-form.007": "EMAIL ADDRESS",
+    "contact-form.008.placeholder": "you@company.com",
+    "contact-form.009": "WHAT ARE YOU THINKING?",
+    "contact-form.010.placeholder": "Tell me a little about your idea…",
+    "contact-form.011": "Website",
+    "certifications.label": "CERTIFICATIONS / LEARNING & FOUNDATIONS",
+    "certifications.heading": "Built on solid foundations.",
+    "certifications.intro": "Professional certification and formal education that support my engineering practice.",
+    "certifications.verify": "Verify certification ↗",
+    "education.label": "EDUCATION",
+    "resume.label": "THE COMPLETE PROFILE",
+    "resume.heading": "Take a closer look.",
+    "resume.download": "Download resume ↓",
+    "contact.sending": "Sending your message…",
+    "contact.sent": "Your message has been sent. Thank you for getting in touch.",
+    "projects.filter.all": "All"
+  },
+  "certifications": [
+    {
+      "title": "AWS Solutions Architect",
+      "issuer": "Amazon Web Services",
+      "level": "Associate · SAA-C03",
+      "description": "Cloud architecture, grounded in the AWS ecosystem.",
+      "verificationUrl": "https://www.credly.com/badges/841df416-76de-472c-979d-b87fb7bfae72/linked_in_profile"
+    }
+  ],
+  "education": [
+    {
+      "title": "Bachelor of Technology",
+      "subject": "Computer Science & Engineering",
+      "institution": "Shri Shankaracharya Technical Campus",
+      "location": "Bhilai, India",
+      "period": "Aug 2019 – Jul 2023"
+    }
+  ]
+}

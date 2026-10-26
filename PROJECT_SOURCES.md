@@ -31,3 +31,7 @@ Reviewed repository trees on 2026-10-26. No application screenshots were found: 
 ## Current presentation refinement
 
 The interface studies described above were removed on 2026-10-26 at the user's request. Current case-study visual sections are workflow diagrams grounded in repository documentation; they do not impersonate application screens or contain invented operational data. Personal projects are listed separately from employer experience.
+
+## Public content editing
+
+Repository-derived project facts now live in content/default.json and are editable through the owner CMS. All published project descriptions still start from the repository-backed content above; changing them is the owner's responsibility. Public contact links use the owner's requested domain address, with setup steps in EMAIL_SETUP.md.

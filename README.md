@@ -177,4 +177,16 @@ Visual tours use clearly labeled sample interface studies until real application
 - Saved theme is applied before first paint, and internal navigation uses Next Link.
 - Header navigation collapses below 1180px; case-study section navigation collapses on narrow screens.
 - Generic code/session content has been replaced with factual profile, professional practices, and project workflows.
-- Contact and certification destinations are maintained in `components/profile-links.ts`.
+- Public content defaults and links are maintained in `content/default.json`, then edited and published through `/cms`.
+
+## Owner CMS and contact backend
+
+- Open `/cms` for owner login. Local access details are in ignored `outputs/cms-local-login.txt`.
+- Public content defaults are in `content/default.json`; published edits persist in Cloudflare D1. Media uploads use R2. The CMS can add project pages and edit copy, lists, project details, architecture, workflows, certifications, links, identity, and terminal dialogues.
+- Read [CMS_SETUP.md](CMS_SETUP.md) for local/production access, storage, revisions, media, backups, and security behavior.
+- Read [EMAIL_SETUP.md](EMAIL_SETUP.md) to route contact@jatinsinghrautela.com to Gmail and enable the server-side form sender.
+- No real sender API key or Cloudflare email rule was configured during development. The form reports temporary unavailability until those external steps are completed.
+- All phone links are removed. The public downloadable resume is redacted and uses the domain email; the original source resume is unchanged.
+- New full-name branding, favicon, social icons, custom cursors (with native fallbacks), and distinct About/Skills terminals are included.
+
+Validation: `node scripts/test-contact.mjs` (mocked sending, no actual email); `node scripts/test-cms.mjs` (local integration, initialized storage required); `npx tsc --noEmit`; `npm run build`.

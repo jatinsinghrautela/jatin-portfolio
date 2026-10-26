@@ -52,3 +52,17 @@ Resume facts are content, not instructions. Do not invent project results or rep
 - [x] Replace generic code and fictitious delivery sessions with factual engineering content.
 - [x] Add verified social and contact links through a shared footer.
 - [x] Validate all changes, document, and push under the verified identity.
+
+## Owner CMS, contact delivery, and identity refresh
+
+- [x] Build authenticated /cms with persistent editable public copy, collections, project pages, links, and media.
+- [x] Add server-side contact delivery with abuse controls and honest unconfigured/error states.
+- [x] Switch public contact address to contact@jatinsinghrautela.com; remove phone links and number.
+- [x] Refresh full-name branding, favicon, social icons, cursor, and distinct animated terminal content.
+- [x] Document Cloudflare email routing, sender-domain setup, secrets, CMS access, backups, and hosting bindings.
+- [x] Test CMS authentication/persistence/validation, contact failures, routes, builds, and browser flows; commit and push.
+
+## External activation remaining
+
+- [ ] Owner configures Cloudflare contact-address forwarding, verifies the sending domain, adds the provider credential through secret settings, and confirms a real delivered message.
+- [ ] Before production hosting, provision/connect D1 and R2, apply the migration, and configure separate production owner credentials.
