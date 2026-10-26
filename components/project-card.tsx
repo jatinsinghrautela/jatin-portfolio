@@ -26,7 +26,7 @@ export default function ProjectCard({project: p}: {project: PortfolioProject}) {
           <ol className="project-architecture">{p.architecture.map(part => <li key={part}>{part}</li>)}</ol>
           {p.id === 'opsradar' && <p className="notice">Focused on alerts and host liveness. Metrics storage, log indexing, and distributed tracing are outside this project’s scope.</p>}
           {p.repository && <a className="button repository-link" href={p.repository} target="_blank" rel="noopener noreferrer">View source on GitHub ↗</a>}
-          {p.plannedRepository && <div className="repository-placeholder"><span className="eyebrow">GITHUB / COMING SOON</span><p className="muted">The OpsRadar repository will be published on my account. Planned URL:</p><code>{p.plannedRepository}</code><p className="notice">Placeholder — repository not published yet.</p></div>}
+          {p.plannedRepository && <div className="repository-placeholder"><span className="eyebrow">GITHUB / COMING SOON</span><p className="muted">The {p.title} repository will be published on my account. Planned URL:</p><code>{p.plannedRepository}</code><p className="notice">Placeholder — repository not published yet.</p></div>}
         </div>}
       </div>
     </article>

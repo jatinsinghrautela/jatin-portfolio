@@ -71,3 +71,10 @@
 - Generated, visually inspected, and integrated two new original conceptual covers with the built-in image tool, optimized to WebP. Prompts and provenance are recorded in ASSETS.md.
 - TypeScript and production build passed. Browser checks confirmed both detail panels, full feature lists, source link, placeholder status, and cover placement.
 - Final checks: category filter passed; Home, Projects, and both new images returned HTTP 200. Repeated TypeScript and build after the final architecture-label refinement; both passed.
+
+## 2026-10-26 - Roach source placeholder
+
+- Replaced the website's external Roach source link with https://github.com/jatinsinghrautela/Roach, displayed as an unpublished placeholder like OpsRadar.
+- Updated the shared placeholder message to use the actual project title.
+- Original repository references remain in PROJECT_SOURCES.md for content provenance only.
+- Validation: TypeScript and diff checks passed; browser confirmed the Roach coming-soon label and planned jatinsinghrautela/Roach URL with no external source button.

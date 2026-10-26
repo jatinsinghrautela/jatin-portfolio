@@ -18,7 +18,7 @@ Planned repository URL: https://github.com/jatinsinghrautela/OpsRadar. This is a
 - https://github.com/diwakar767/Roach/blob/main/README.md
 - https://github.com/diwakar767/Roach/blob/main/docs/project.md
 
-Descriptions reflect shop-scoped inventory, QR-assisted workflows, restock, checkout, invoices, reports, alerts, trial access, and offline payment records. Do not copy marketing user counts as actual results. The source link uses the repository supplied by the user.
+Descriptions reflect shop-scoped inventory, QR-assisted workflows, restock, checkout, invoices, reports, alerts, trial access, and offline payment records. Do not copy marketing user counts as actual results. The website now displays the user-requested planned URL https://github.com/jatinsinghrautela/Roach as an unpublished placeholder. The links above remain research references only.
 
 ## Presentation
 

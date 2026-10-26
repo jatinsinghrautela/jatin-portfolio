@@ -50,7 +50,7 @@ export const projects: PortfolioProject[] = [
       'Shop-scoped accounts, a 30-day trial, and operator-recorded offline payments that extend access without deleting data.'
     ],
     architecture: ['React + Redux', 'Nginx', 'Express API', 'MongoDB'],
-    repository: 'https://github.com/diwakar767/Roach'
+    plannedRepository: 'https://github.com/jatinsinghrautela/Roach'
   },
   {
     id: 'pipeline',
