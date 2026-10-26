@@ -45,3 +45,5 @@
 - Added a tracked .githooks/pre-commit guard requiring the verified identity for both author and committer, including environment overrides.
 - Enable the guard in this checkout with `git config core.hooksPath .githooks`. Future clones must run that command too. Git hooks can be explicitly bypassed, so this is a local safeguard, not a GitHub enforcement rule.
 - Original history remains recoverable from outputs/before-contributor-cleanup.bundle.
+- Completed guarded force push. Remote main contains only the fresh snapshot and subsequent commits authored and committed by the verified account. Local and remote tips matched after verification.
+- Guard validation passed with bundled Git: verified identity returned 0; forbiddenlinkers22 identity was rejected with exit 1. The default system Git lacks the hook subcommand; bundled Git was used for direct hook testing.
