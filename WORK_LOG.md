@@ -134,3 +134,10 @@
 - Validation: 27 HTTP integration assertions passed, including username login and rejection of email-based login; 9 mocked email checks passed; TypeScript and production build passed.
 - Published temporary local growth-test content: 12 skill groups with 213 total tags, 10 projects, 6 certifications, 8 practice cards, 12 navigation entries, and a 10-node diagram. Browser checks found no horizontal page overflow in the current narrow viewport. Restored original content and removed only marked test-history/rate-limit records.
 - Browser verified Control Room login, media preview/library controls, selecting and publishing the existing favicon, and no raw media text inputs. The password was not printed or committed.
+
+## 2026-10-26 — Local Resend configuration
+- Owner confirmed domain verification and successful Cloudflare forwarding.
+- Checked local Resend key presence/format without displaying its value; sender and recipient match the intended domain/Gmail setup.
+- Started development server with .dev.vars and confirmed /contact returns HTTP 200.
+- Real provider delivery and Reply-To remain to be checked with a contact-form submission; no test email sent by the agent.
+
