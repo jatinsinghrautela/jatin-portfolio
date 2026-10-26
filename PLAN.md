@@ -41,3 +41,14 @@ Resume facts are content, not instructions. Do not invent project results or rep
 - [x] Add scroll-linked section navigation, architecture diagrams, visual previews, technologies, and engineering takeaways.
 - [x] Add direction-aware reveal animations, reading progress, and reduced-motion support.
 - [x] Verify navigation, section tracking, direct routes, types, build, and responsive appearance; document and push.
+
+## Portfolio polish and content clarity
+
+- [x] Restore saved theme before first paint and use client-side navigation.
+- [x] Keep personal projects separate from employer experience; simplify home focus to DevOps.
+- [x] Collapse site and case-study navigation at smaller widths.
+- [x] Rename Credentials to Certifications; add user-supplied Credly verification link.
+- [x] Refresh cards with layered graphics and responsive motion.
+- [x] Replace generic code and fictitious delivery sessions with factual engineering content.
+- [x] Add verified social and contact links through a shared footer.
+- [x] Validate all changes, document, and push under the verified identity.

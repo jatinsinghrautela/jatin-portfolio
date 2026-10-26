@@ -20,17 +20,6 @@ export const caseStudies = {
     takeaways: [['Keep stock changes traceable', 'Restock, adjustment, and checkout movements create a history behind the current quantity rather than leaving only an unexplained number.'], ['Preserve the sale', 'Invoice lines retain the name, SKU, prices, and cost at checkout time, so later product edits do not redefine a past sale.'], ['Treat QR as identification', 'A product QR code identifies an item. Ownership and account-access checks still belong at the API boundary.']],
     technologies: [['React 18 + Redux Toolkit', 'Interface and client state'], ['React Router', 'Inventory and account navigation'], ['Express + Mongoose', 'Application routes and data models'], ['MongoDB', 'Shop-scoped records and invoices'], ['Nginx + Docker Compose', 'Single-origin deployment and services'], ['Camera / QR workflows', 'Product identification and stock actions']],
     scope: 'Payment extensions are recorded offline by an operator. There is no card-payment gateway. Email features require SMTP configuration.'
-  },
-  pipeline: {
-    subtitle: 'Repeatable delivery, grounded in production work.',
-    challenge: 'Production changes need a repeatable path from configuration to deployment, with enough visibility to understand the outcome. This case study summarizes resume-backed delivery experience at Comviva.',
-    nodes: [['SOURCE', 'Versioned changes', 'Application / configuration'], ['AUTOMATION', 'Azure DevOps', 'CI/CD workflows'], ['DELIVERY', 'ArgoCD + Kubernetes', 'GitOps deployment'], ['OPERATIONS', 'Prometheus + Grafana', 'Monitoring and alerting']],
-    flow: 'This is a conceptual workflow based on the tools listed in my resume, not a reproduction of private employer infrastructure. CI/CD and GitOps support delivery; monitoring supports operational visibility.',
-    connections: [[0,1],[1,2],[2,3]],
-    previews: ['Delivery workflow', 'Deployment checks', 'Operational visibility'],
-    takeaways: [['Version repeatable work', 'Automation is easier to review and improve when configuration and workflows are versioned.'], ['Connect delivery to operations', 'A deployment is part of an operational lifecycle that also needs monitoring and incident response.'], ['Share operational knowledge', 'Mentoring and understandable workflows help teams respond more consistently.']],
-    technologies: [['Azure DevOps', 'CI/CD automation'], ['ArgoCD', 'GitOps delivery'], ['Kubernetes', 'Container orchestration'], ['AWS + Azure', 'Cloud workloads and infrastructure'], ['Prometheus + Grafana', 'Monitoring and alerting']],
-    scope: 'The resume reports a 40% increase in deployment frequency. Private infrastructure, source code, and production screenshots are not published here.'
   }
 } as const;
 export type CaseStudyId = keyof typeof caseStudies;

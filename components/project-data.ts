@@ -51,15 +51,5 @@ export const projects: PortfolioProject[] = [
     ],
     architecture: ['React + Redux', 'Nginx', 'Express API', 'MongoDB'],
     plannedRepository: 'https://github.com/jatinsinghrautela/Roach'
-  },
-  {
-    id: 'pipeline',
-    title: 'Delivery at production pace.',
-    category: 'DevOps',
-    tags: ['Azure DevOps', 'ArgoCD', 'Kubernetes'],
-    description: 'CI/CD and GitOps delivery for production workloads at Comviva.',
-    story: 'Designed and implemented pipelines using Azure DevOps and ArgoCD, accelerating deployment frequency by 40%. Work also included Kubernetes and Azure infrastructure optimization and AWS application operations.',
-    features: [],
-    architecture: ['Commit', 'Build', 'Deploy', 'Observe']
   }
 ];

@@ -91,3 +91,17 @@
 - TypeScript and production build passed. Projects and all three detail routes returned HTTP 200.
 - Browser checks verified card navigation, direct section links, automatic active sections, upward direction detection, progress updates, visual-tour switching, return navigation, Roach content, and theme toggle. Reviewed narrow-screen layout and OpsRadar diagram.
 - Final dark-theme review confirmed Technologies tracking and no horizontal document overflow in the current browser viewport.
+
+## 2026-10-26 - Theme, navigation, content, and card polish
+
+- Added a theme bootstrap script in the document head to restore the saved theme before painting; it falls back to the system preference. Theme writes handle unavailable local storage, and cross-tab changes stay synchronized.
+- Changed internal page links to Next Link so navigation preserves the current document and theme rather than reloading it. Browser checks confirmed dark navigation, dark hard refresh, and light navigation.
+- Kept only OpsRadar and Roach in personal Projects. Removed the professional delivery project card and redirected its old detail URL to Experience. Experience contains no OpsRadar or Roach references; its CTA leads to Contact.
+- Changed the home eyebrow to DEVOPS and updated shared branding to DevOps Engineer.
+- Added a compact main-navigation disclosure below 1180px, with close-on-selection, Escape handling, outside-click handling, and accessible expanded state. The case-study section menu also collapses on narrow screens.
+- Renamed the page and navigation to Certifications at /certifications. /credentials redirects for existing links. Added the exact Credly verification URL provided by the user. The web reader could not independently inspect the Credly page; browser checks verified the website's outgoing verification href.
+- Added the user-supplied LinkedIn and Instagram links, existing verified GitHub profile, email, phone, and resume link through a shared responsive footer and Contact links.
+- Refreshed project cards with rounded glass panels, layered rings, floating project glyphs, image zoom, hover lift, and animated arrows; added graphic treatments to skills, practice, experience, and certification cards. Reduced-motion overrides are included.
+- Removed the generic code snippets, fake deployment session, and invented application tables. Replaced them with resume-backed engineering practices and animated product workflow diagrams. Preserved the factual animated profile terminal.
+- TypeScript and production build passed. Eleven current/legacy route checks succeeded, including followed redirects. Browser checks verified menus, closing section selection, workflow controls, both themes, updated personal project labels, certification/social hrefs, and no horizontal overflow in the current narrow viewport.
+- Restarted the local development server after the framework's hot-reload module graph became stale; preview remains at http://127.0.0.1:5173/.

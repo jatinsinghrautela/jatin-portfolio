@@ -27,3 +27,7 @@ Both projects have independent case studies using neutral product descriptions. 
 ## Case-study visuals
 
 Reviewed repository trees on 2026-10-26. No application screenshots were found: LongShot contained branding images; Roach contained React logos and a marketing inventory image. The detail pages therefore use CSS/HTML interface studies with explicit illustrative/sample-data labels. They are not presented as actual screenshots. Technologies and engineering takeaways derive from the reviewed project architecture; they do not invent the user's personal contribution history.
+
+## Current presentation refinement
+
+The interface studies described above were removed on 2026-10-26 at the user's request. Current case-study visual sections are workflow diagrams grounded in repository documentation; they do not impersonate application screens or contain invented operational data. Personal projects are listed separately from employer experience.

@@ -1,2 +1,2 @@
-import Portfolio from '../../components/portfolio';
-export default function Page(){return <Portfolio page='credentials'/>}
+import {redirect} from 'next/navigation';
+export default function Page(){redirect('/certifications')}

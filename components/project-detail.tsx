@@ -3,15 +3,16 @@ import {useEffect,useRef,useState} from 'react';
 import SiteHeader from './site-header';
 import {projects} from './project-data';
 import {caseStudies,type CaseStudyId} from './case-study-data';
-import TypingTerminal from './typing-terminal';
+import SiteFooter from './site-footer';
+import Link from 'next/link';
 
-const sections=[['overview','Overview'],['architecture','Architecture'],['snapshots','Visual tour'],['technologies','Technologies'],['learnings','Learnings']] as const;
+const sections=[['overview','Overview'],['architecture','Architecture'],['snapshots','Workflows'],['technologies','Technologies'],['learnings','Learnings']] as const;
 
 function Architecture({id}:{id:CaseStudyId}) {
   const data=caseStudies[id];
   const positions=[[25,35],[420,35],[420,235],[25,235]];
   return <figure className="architecture-figure"><div className="diagram-scroll"><svg viewBox="0 0 760 385" role="img" aria-labelledby={`${id}-diagram-title ${id}-diagram-description`}>
-    <title id={`${id}-diagram-title`}>{id === 'opsradar' ? 'Agents and console connect to the API; the API connects to PostgreSQL' : id === 'roach' ? 'Browser to Nginx to Express to MongoDB' : 'Conceptual delivery and operations workflow'}</title>
+    <title id={`${id}-diagram-title`}>{id === 'opsradar' ? 'Agents and console connect to the API; the API connects to PostgreSQL' : 'Browser to Nginx to Express to MongoDB'}</title>
     <desc id={`${id}-diagram-description`}>{data.flow}</desc>
     <defs><marker id={`${id}-arrow`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs>
     {data.connections.map(([from,to])=>{const a=positions[from],b=positions[to];const horizontal=a[1]===b[1];const x1=horizontal?(a[0]<b[0]?a[0]+290:a[0]):a[0]+145;const y1=horizontal?a[1]+52:a[1]+105;const x2=horizontal?(a[0]<b[0]?b[0]:b[0]+290):b[0]+145;const y2=horizontal?b[1]+52:b[1];return <path key={`${from}-${to}`} className="diagram-wire" d={from===3&&to===1?"M315,287 H365 V185 H565 V140":`M${x1},${y1} L${x2},${y2}`} markerEnd={`url(#${id}-arrow)`}/>})}
@@ -21,27 +22,24 @@ function Architecture({id}:{id:CaseStudyId}) {
 
 function VisualTour({id}:{id:CaseStudyId}) {
   const[view,setView]=useState(0);
-  const labels=caseStudies[id].previews;
-  const rows=id==='opsradar'?[
-    [['Disk capacity warning','Major','Open'],['Service heartbeat','Info','Received'],['Application recovered','Clear','Resolved']],
-    [['host-01','Linux','Reporting'],['host-02','Windows','Reporting'],['host-03','Linux','No heartbeat']],
-    [['New alert received','Application group','Unread'],['Host status changed','Operations','Unread'],['Alert resolved','Application group','Read']]
-  ]:id==='roach'?[
-    [['Desk lamp','SKU DEMO-01','12 on hand'],['Notebook','SKU DEMO-02','4 on hand'],['Storage box','SKU DEMO-03','18 on hand']],
-    [['Find product','QR scan / SKU','Identify'],['Review quantity','Current stock','Inspect'],['Record restock','Add units','Update']],
-    [['Review basket','Product + quantity','Confirm'],['Record invoice','Price / cost snapshot','Save'],['Update stock','Checkout movement','Trace']]
+  const journeys=id==='opsradar'?[
+    {name:'Alert lifecycle',title:'From host signal to an actionable alert.',steps:[['Detect','An engineer or host process reports an operational issue.'],['Authenticate','The agent submits the alert with its per-server API key.'],['Review','The API stores the record and the console presents scoped alerts.'],['Resolve','A resolution updates the alert lifecycle.']]},
+    {name:'Host liveness',title:'Know when a host stops checking in.',steps:[['Run','A Node agent runs on Windows or Linux.'],['Heartbeat','Periodic heartbeats reach the control plane.'],['Evaluate','The service checks the elapsed time since the last beat.'],['Surface','The console exposes host availability to operators.']]},
+    {name:'Operator workflow',title:'Give operational signals the right context.',steps:[['Organize','Arrange inventory by country, application, group, and server.'],['Scope','User access determines which alerts are visible.'],['Review','Use the alert inbox and notification feed.'],['Retain','Apply configured retention to stored alerts.']]}
   ]:[
-    [['Versioned change','Source','Review'],['CI/CD workflow','Azure DevOps','Build'],['GitOps sync','ArgoCD','Deploy']],
-    [['Configuration','Illustrative','Inspect'],['Workload status','Illustrative','Check'],['Release outcome','Illustrative','Review']],
-    [['Service health','Monitoring','Observe'],['Actionable signal','Alerting','Investigate'],['Operational feedback','Team','Improve']]
+    {name:'Product to shelf',title:'Create a product record that is ready to use.',steps:[['Record','Add the product, image, price, cost, and starting quantity.'],['Identify','Generate a product QR label.'],['Find','Scan the label or search by name or SKU.'],['Restock','Add units and retain a stock movement record.']]},
+    {name:'Checkout to invoice',title:'Connect each sale with its stock movement.',steps:[['Select','Collect products and quantities in checkout.'],['Validate','Check available stock before recording the sale.'],['Invoice','Store product and price snapshots for each invoice line.'],['Update','Reduce stock and record checkout movements.']]},
+    {name:'Stock to insight',title:'Make the inventory record useful after the sale.',steps:[['Track','Keep restock, adjustment, and checkout movements.'],['Notify','Surface low-stock and out-of-stock notifications.'],['Report','Review units sold, revenue, cost, and profit.'],['Act','Use the records to plan replenishment.']]}
   ];
-  return <div className="visual-tour"><div className="preview-selector" role="group" aria-label="Select illustrative workflow">{labels.map((label,i)=><button key={label} aria-pressed={view===i} onClick={()=>setView(i)}>{String(i+1).padStart(2,'0')} / {label}</button>)}</div><div className="interface-study" key={view}><div className="windowbar"><span><b className="windowdots">● ● ●</b> &nbsp; {id==='pipeline'?'Delivery study':projects.find(p=>p.id===id)?.title}</span><span>ILLUSTRATIVE / SAMPLE DATA</span></div><div className="study-content"><div className="eyebrow">{id==='opsradar'?'OPERATIONS CONSOLE':id==='roach'?'SHOP WORKSPACE':'DELIVERY WORKFLOW'}</div><h3>{labels[view]}</h3><div className="study-summary">{['Identify','Review','Act'].map((s,i)=><div key={s}><span>0{i+1}</span><strong>{s}</strong></div>)}</div><div className="study-rows">{rows[view].map(([name,context,status])=><div key={name}><span>{name}<small>{context}</small></span><span className="study-status">{status}</span></div>)}</div></div></div><p className="notice">Interface study with sample data, based on documented workflows. This is not a screenshot of the application.</p></div>;
+  const current=journeys[view];
+  return <div className="workflow-tour"><div className="preview-selector" role="group" aria-label="Choose project workflow">{journeys.map((j,i)=><button key={j.name} aria-pressed={view===i} onClick={()=>setView(i)}>{String(i+1).padStart(2,'0')} / {j.name}</button>)}</div><div className="workflow-canvas" key={view}><span className="eyebrow">{id==='opsradar'?'OPSRADAR / OPERATIONS':'ROACH / INVENTORY'}</span><h3>{current.title}</h3><ol>{current.steps.map(([name,detail],i)=><li key={name}><span className="workflow-dot">0{i+1}</span><div><h4>{name}</h4><p>{detail}</p></div><i aria-hidden="true"/></li>)}</ol></div></div>;
 }
 
 export default function ProjectDetail({id}:{id:CaseStudyId}) {
   const p=projects.find(project=>project.id===id)!;
   const data=caseStudies[id];
   const[active,setActive]=useState('overview');
+  const[sectionsOpen,setSectionsOpen]=useState(false);
   const root=useRef<HTMLDivElement>(null);
   const progress=useRef<HTMLDivElement>(null);
   useEffect(()=>{
@@ -68,14 +66,14 @@ export default function ProjectDetail({id}:{id:CaseStudyId}) {
   },[]);
   const next=projects[(projects.findIndex(project=>project.id===id)+1)%projects.length];
   return <><SiteHeader page="projects"/><div className="case-page" ref={root} data-direction="down"><div className="reading-track" aria-hidden="true"><div ref={progress}/></div><main>
-    <header className="case-hero" id="case-top"><a className="back-link" href="/projects">← All projects</a><div className="eyebrow">{id==='pipeline'?'PROFESSIONAL EXPERIENCE / CASE STUDY':'PROJECT / CASE STUDY'}</div><h1>{p.title}</h1><p className="case-subtitle">{data.subtitle}</p><div className="tags">{p.tags.map(t=><span key={t}>{t}</span>)}</div>{p.image&&<div className="case-cover"><img src={p.image} alt={p.imageAlt} width="1536" height="1024"/><span className="art-caption">ORIGINAL CONCEPT ART</span></div>}</header>
-    <div className="case-layout"><aside className="case-index"><div className="eyebrow">INSIDE THE PROJECT</div><div className="case-index-links" aria-label="Case study sections" role="navigation">{sections.map(([anchor,label],i)=><a key={anchor} href={`#${anchor}`} className={active===anchor?'current':''} aria-current={active===anchor?'location':undefined}><span>{String(i+1).padStart(2,'0')}</span>{label}<i aria-hidden="true"/></a>)}</div><a className="case-backtop" href="#case-top">Back to top ↑</a></aside>
+    <header className="case-hero" id="case-top"><Link className="back-link" href="/projects">← All projects</Link><div className="eyebrow">PERSONAL PROJECT / CASE STUDY</div><h1>{p.title}</h1><p className="case-subtitle">{data.subtitle}</p><div className="tags">{p.tags.map(t=><span key={t}>{t}</span>)}</div>{p.image&&<div className="case-cover"><img src={p.image} alt={p.imageAlt} width="1536" height="1024"/><span className="art-caption">ORIGINAL CONCEPT ART</span></div>}</header>
+    <div className="case-layout"><aside className="case-index" onKeyDown={e=>{if(e.key==='Escape')setSectionsOpen(false)}}><button type="button" className="section-menu-toggle" aria-controls="case-section-links" aria-expanded={sectionsOpen} onClick={()=>setSectionsOpen(!sectionsOpen)}>On this page <span>{sections.find(([key])=>key===active)?.[1]}</span><b aria-hidden="true">{sectionsOpen?'−':'+'}</b></button><div className="eyebrow">INSIDE THE PROJECT</div><div id="case-section-links" className={`case-index-links ${sectionsOpen?'sections-open':''}`} aria-label="Case study sections" role="navigation">{sections.map(([anchor,label],i)=><a key={anchor} href={`#${anchor}`} onClick={()=>setSectionsOpen(false)} className={active===anchor?'current':''} aria-current={active===anchor?'location':undefined}><span>{String(i+1).padStart(2,'0')}</span>{label}<i aria-hidden="true"/></a>)}</div><a className="case-backtop" href="#case-top">Back to top ↑</a></aside>
     <div className="case-body">
       <section id="overview" data-case-section><div className="eyebrow">01 / OVERVIEW</div><h2>The idea, in context.</h2><p className="case-intro">{p.description}</p><p className="muted">{p.story}</p><div className="challenge-panel"><span className="eyebrow">THE PROBLEM</span><p>{data.challenge}</p></div>{p.features.length>0&&<><h3>What it does</h3><ul className="feature-list">{p.features.map((f,i)=><li key={f}><span>{String(i+1).padStart(2,'0')}</span>{f}</li>)}</ul></>}<p className="notice scope-note">{data.scope}</p></section>
       <section id="architecture" data-case-section><div className="eyebrow">02 / ARCHITECTURE</div><h2>Follow the signal.</h2><p className="muted">A view of the main components and their connections.</p><Architecture id={id}/></section>
-      <section id="snapshots" data-case-section><div className="eyebrow">03 / VISUAL TOUR</div><h2>A closer look at the workflow.</h2><p className="muted">Explore the main application journeys through these illustrative interface studies. Actual application screenshots will replace them when available.</p><VisualTour id={id}/>{id==='pipeline'&&<TypingTerminal mode="delivery"/>}</section>
+      <section id="snapshots" data-case-section><div className="eyebrow">03 / WORKFLOWS</div><h2>A closer look at the workflow.</h2><p className="muted">Follow the product journeys, from the first action to the recorded outcome.</p><VisualTour id={id}/></section>
       <section id="technologies" data-case-section><div className="eyebrow">04 / TECHNOLOGIES</div><h2>Every tool has a role.</h2><div className="case-tech-grid">{data.technologies.map(([tool,role],i)=><article key={tool}><span className="eyebrow">{String(i+1).padStart(2,'0')}</span><h3>{tool}</h3><p className="muted">{role}</p></article>)}</div></section>
       <section id="learnings" data-case-section><div className="eyebrow">05 / LEARNINGS</div><h2>Engineering takeaways.</h2><p className="muted">Design lessons illustrated by this project’s architecture and workflows.</p><div className="takeaways">{data.takeaways.map(([title,detail],i)=><article key={title}><span>0{i+1}</span><div><h3>{title}</h3><p className="muted">{detail}</p></div></article>)}</div>{p.plannedRepository&&<div className="repository-placeholder"><span className="eyebrow">GITHUB / COMING SOON</span><p className="muted">Planned repository for {p.title}:</p><code>{p.plannedRepository}</code><p className="notice">Placeholder — repository not published yet.</p></div>}</section>
-    </div></div><section className="case-next"><span className="eyebrow">KEEP EXPLORING</span><a href={`/projects/${next.id}`}><h2>{next.title} <span>↗</span></h2><p className="muted">{next.description}</p></a></section>
-  </main></div><footer><span>JATIN SINGH RAUTELA / DevOps & Development</span><a href="/projects">All projects ↗</a></footer></>;
+    </div></div><section className="case-next"><span className="eyebrow">KEEP EXPLORING</span><Link href={`/projects/${next.id}`}><h2>{next.title} <span>↗</span></h2><p className="muted">{next.description}</p></Link></section>
+  </main></div><SiteFooter/></>;
 }

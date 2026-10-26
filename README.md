@@ -169,3 +169,12 @@ Project cards now link to `/projects/opsradar`, `/projects/roach`, and `/project
 Each page has Overview, Architecture, Visual tour, Technologies, and Learnings sections.
 Section links support direct hash navigation; the active item follows scrolling. Reveals, reading progress, and diagram signal animations respect reduced-motion settings.
 Visual tours use clearly labeled sample interface studies until real application screenshots are supplied.
+
+## Current portfolio behavior
+
+- Personal projects are separate from Comviva work experience; the old delivery case-study URL redirects to Experience.
+- Certifications lives at `/certifications`; `/credentials` redirects. The AWS card links to the supplied Credly verification page.
+- Saved theme is applied before first paint, and internal navigation uses Next Link.
+- Header navigation collapses below 1180px; case-study section navigation collapses on narrow screens.
+- Generic code/session content has been replaced with factual profile, professional practices, and project workflows.
+- Contact and certification destinations are maintained in `components/profile-links.ts`.
