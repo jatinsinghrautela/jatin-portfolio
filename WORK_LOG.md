@@ -37,3 +37,11 @@
 - Saved the original history locally in outputs/before-contributor-cleanup.bundle (ignored by Git).
 - Prepared a new parentless snapshot of the current portfolio under Jatin Singh Rautela's verified Git identity, rather than reassigning authorship of individual imported commits.
 - Replacing remote main is pending explicit approval because it rewrites published history. Use a lease against 39774230122bab9b83ae26aa70307500b376e295 to reject unexpected remote changes.
+
+## 2026-10-26 - Approved history replacement and identity guard
+
+- User explicitly approved replacing the published main history with the prepared snapshot.
+- Kept repository-local author and committer defaults set to Jatin Singh Rautela <jatinsinghrautela@gmail.com>.
+- Added a tracked .githooks/pre-commit guard requiring the verified identity for both author and committer, including environment overrides.
+- Enable the guard in this checkout with `git config core.hooksPath .githooks`. Future clones must run that command too. Git hooks can be explicitly bypassed, so this is a local safeguard, not a GitHub enforcement rule.
+- Original history remains recoverable from outputs/before-contributor-cleanup.bundle.

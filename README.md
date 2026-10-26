@@ -142,3 +142,16 @@ The contact form opens an email draft; it does not submit to a backend.
 The delivery terminal and workbench code are illustrative. Profile content is based on the supplied resume.
 
 See [PLAN.md](PLAN.md) for the implementation plan and [WORK_LOG.md](WORK_LOG.md) for changes, validation, and GitHub synchronization status.
+
+### Commit identity protection
+
+This project uses `Jatin Singh Rautela <jatinsinghrautela@gmail.com>` for new commits.
+After cloning, enable the identity guard:
+
+```sh
+git config user.name "Jatin Singh Rautela"
+git config user.email "jatinsinghrautela@gmail.com"
+git config core.hooksPath .githooks
+```
+
+The pre-commit hook rejects a different author or committer identity. Hooks are local safeguards and can be explicitly bypassed.

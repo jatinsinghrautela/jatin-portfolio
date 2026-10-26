@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+expected='Jatin Singh Rautela <jatinsinghrautela@gmail.com>'
+for kind in AUTHOR COMMITTER; do
+  identity=$(git var "GIT_${kind}_IDENT")
+  case "$identity" in
+    "$expected "*) ;;
+    *) echo "Commit blocked: $kind identity must be $expected. Check repository Git settings and identity environment overrides." >&2; exit 1 ;;
+  esac
+done
