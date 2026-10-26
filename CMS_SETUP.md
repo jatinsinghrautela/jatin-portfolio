@@ -2,7 +2,7 @@
 
 ## Local owner login
 
-- Open http://127.0.0.1:5173/hq.
+- Open http://127.0.0.1:5173/cockpit.
 - The generated local username and password are in `outputs/cms-local-login.txt` (ignored by Git). Keep that file private.
 - `.dev.vars` contains the local salted password hash and mail settings, also ignored by Git. There is no default/shared password and no public account registration.
 - On a new checkout, run `node scripts/setup-local-cms.mjs` once to generate a new local login. It refuses to overwrite an existing secrets file.
@@ -63,7 +63,7 @@ Unused uploads can be removed from Media library. Files referenced by current co
 
 ## Adaptive content and route migration
 
-The owner workspace is **Control Room** at `/hq`. `/cms` and `/control-room` redirect for existing links. API routes retain `/api/cms/...`; the route name is branding, not an authentication safeguard. Set `CMS_OWNER_USERNAME=admin` in production, replacing the earlier owner-email setting. The same salted password-hash/session protections remain.
+The owner workspace is **Cockpit** at `/cockpit`. `/hq`, `/cms`, and `/control-room` redirect for existing links. API routes retain `/api/cms/...`; the route name is branding, not an authentication safeguard. Set `CMS_OWNER_USERNAME=admin` in production, replacing the earlier owner-email setting. The same salted password-hash/session protections remain.
 
 Content cards use auto-fit grids, tags and labels wrap, and header navigation measures available space before choosing the compact menu. Featured projects appear on Home; use each project's **Featured** checkbox to control that list. Experience entries have their own Company field. Education is not displayed on Certifications.
 
@@ -73,7 +73,7 @@ For local growth checks, `node scripts/stress-content.mjs stage` temporarily pub
 
 ## Owner password and theme
 
-The login screen and owner toolbar both include the theme control. After signing in at `/hq`, choose **Password & security**, enter your current password, and confirm a new password of 12–256 characters. Publish or discard any draft first. A successful change stores only a salted PBKDF2 hash in D1 and signs out every owner session. Sign in again with the new password; the username remains `admin`.
+The login screen and owner toolbar both include the theme control. After signing in at `/cockpit`, choose **Password & security**, enter your current password, and confirm a new password of 12–256 characters. Publish or discard any draft first. A successful change stores only a salted PBKDF2 hash in D1 and signs out every owner session. Sign in again with the new password; the username remains `admin`.
 
 Apply `drizzle/0001_milky_kree.sql` once to each existing database before using this release. For this initialized local database it has already been applied. New databases need both committed migrations in order. Production needs its own migration through the actual deployment's configured database. No production migration was run here.
 

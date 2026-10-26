@@ -176,3 +176,8 @@
 - TypeScript and production build passed. Restarted local development and warmed page modules after a stalled first request; dashboard now responds HTTP 200.
 - Browser verification: light and dark use identical computed mask, 514.425 × 342.95px image dimensions, and centered translation. The mask follows the bitmap's intrinsic aspect ratio, eliminating the light-theme rectangle caused by masking the taller letterboxed container.
 - Typing starts with empty visible strings and finishes with the complete editable headline/introduction. Headline height remains 242.8125px and introduction height remains 85.5px before and after typing at the checked desktop viewport; no horizontal overflow. Saved the light-theme preview in ignored outputs.
+
+## 2026-10-26 — Cockpit owner workspace
+- Moved the owner editor to /cockpit and renamed its heading/page title to Cockpit. Updated setup documentation and the local login URL without changing credentials.
+- /hq, /cms, and /control-room each redirect directly to /cockpit.
+- Verified /cockpit returns HTTP 200 with the expected title; all three legacy routes return HTTP 307 with Location /cockpit. TypeScript and diff checks pass.

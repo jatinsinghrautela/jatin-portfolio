@@ -193,7 +193,7 @@ Validation: `node scripts/test-contact.mjs` (mocked sending, no actual email); `
 
 ## Adaptive content refinements
 
-The owner workspace is now `/hq` with username `admin`; the existing local password is unchanged. `/cms` and `/control-room` redirect to the new route. Image, favicon, and resume fields use upload buttons and a visual library instead of path entry.
+The owner workspace is now `/cockpit` with username `admin`; the existing local password is unchanged. `/hq`, `/cms`, and `/control-room` redirect to the new route. Image, favicon, and resume fields use upload buttons and a visual library instead of path entry.
 
 Repeatable cards and technology lists use auto-fit grids and wrapping. Featured projects appear on Home, navigation measures available space, experience supports per-entry companies, and architecture diagrams adapt to the configured component count. Education is no longer displayed on Certifications.
 
@@ -203,7 +203,7 @@ Local growth checks: `node scripts/stress-content.mjs stage` then `node scripts/
 
 Use the header search icon or **Ctrl/⌘ K**. Home defaults to the entire portfolio; other pages default to their current rendered content. Switch scope inside the dialog, use arrow keys and Enter to open a match, and Escape to close. Public search uses the published content and never indexes the owner editor. The glass header stays visible while scrolling and collapses navigation when space runs out.
 
-Owner login is at `/hq`, with a theme control and **Password & security** settings. Existing `/control-room` and `/cms` links redirect. The new owner-settings database migration must be applied to production before deploying this version; see CMS_SETUP.md.
+Owner login is at `/cockpit`, with a theme control and **Password & security** settings. Existing `/hq`, `/control-room`, and `/cms` links redirect. The new owner-settings database migration must be applied to production before deploying this version; see CMS_SETUP.md.
 
 Search stays empty until a query is entered. The compact search icon retains the Ctrl/Command K shortcut. Navigation re-measures desktop content independently of its compact state, so desktop links return after widening the window.
 
