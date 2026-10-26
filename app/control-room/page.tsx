@@ -1,3 +1,3 @@
-import Cms from '../../components/cms';
-export const metadata={title:'Control Room | Jatin Singh Rautela',robots:{index:false,follow:false}};
-export default function Page(){return <Cms/>}
+import {redirect} from 'next/navigation';
+export const metadata={robots:{index:false,follow:false}};
+export default function Page(){redirect('/hq')}

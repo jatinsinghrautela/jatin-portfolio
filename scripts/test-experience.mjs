@@ -1,0 +1,10 @@
+import fs from 'node:fs';import ts from 'typescript';import assert from 'node:assert/strict';
+const exported={};Function('exports',ts.transpile(fs.readFileSync('lib/experience.ts','utf8'),{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}))(exported);
+const role=(company,title,date)=>({company,title,date});
+const roles=[role('First company','Trainee','Aug 2023 — Nov 2023'),role('First company','Engineer','Dec 2023 — Jun 2025'),role('New company','Senior engineer','2026-01 — Present'),role('First company','Contract','Jul 2025 — Dec 2025')];
+const groups=exported.groupExperience(roles);
+assert.deepEqual(groups.map(g=>g.company),['New company','First company']);
+assert.deepEqual(groups[1].roles.map(r=>r.title),['Contract','Engineer','Trainee']);
+assert.equal(roles[0].title,'Trainee');assert.ok(exported.employmentStart('2026-01 — Present')>exported.employmentStart('Dec 2025 — Present'));
+assert.equal(exported.groupExperience([role('ACME','Earlier','Jan 2020 — Dec 2022'),role(' acme ','Current','Jan 2023 — Present')]).length,1);
+console.log('Experience checks passed: newest role added last sorts first, promotions group by company, ISO/month dates work, and input order is preserved.');

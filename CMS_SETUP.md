@@ -2,7 +2,7 @@
 
 ## Local owner login
 
-- Open http://127.0.0.1:5173/control-room.
+- Open http://127.0.0.1:5173/hq.
 - The generated local username and password are in `outputs/cms-local-login.txt` (ignored by Git). Keep that file private.
 - `.dev.vars` contains the local salted password hash and mail settings, also ignored by Git. There is no default/shared password and no public account registration.
 - On a new checkout, run `node scripts/setup-local-cms.mjs` once to generate a new local login. It refuses to overwrite an existing secrets file.
@@ -53,7 +53,7 @@ Configure production Worker secrets separately: `CMS_OWNER_USERNAME`, `CMS_PASSW
 
 ## Verification
 
-`node scripts/test-cms.mjs` runs local HTTP integration checks using the ignored local login file. It performs temporary publications, tests a dynamically added project, validates uploads, tests origin/auth checks and stale writes, checks the unconfigured mail failure, restores the original document, removes its uploaded file, and signs out. It does not send email. It expects the local server and initialized D1/R2 bindings. Do not run it against production.
+`node scripts/test-cms.mjs` runs local HTTP integration checks using the ignored local login file. It performs temporary publications, tests a dynamically added project, validates uploads, tests origin/auth checks and stale writes, checks non-sending contact validation, restores the original document, removes its uploaded file, and signs out. It does not send email. It expects the local server and initialized D1/R2 bindings. Do not run it against production.
 
 Generate a separate production owner login with `node scripts/generate-owner-credentials.mjs`. It writes ignored `outputs/production-owner-credentials.txt` and prints no secrets. Copy the username/hash into your production secret settings and keep the password private. This helper refuses to overwrite its existing output file.
 
@@ -63,10 +63,22 @@ Unused uploads can be removed from Media library. Files referenced by current co
 
 ## Adaptive content and route migration
 
-The owner workspace is **Control Room** at `/control-room`. `/cms` redirects for existing links. API routes retain `/api/cms/...`; the route name is branding, not an authentication safeguard. Set `CMS_OWNER_USERNAME=admin` in production, replacing the earlier owner-email setting. The same salted password-hash/session protections remain.
+The owner workspace is **Control Room** at `/hq`. `/cms` and `/control-room` redirect for existing links. API routes retain `/api/cms/...`; the route name is branding, not an authentication safeguard. Set `CMS_OWNER_USERNAME=admin` in production, replacing the earlier owner-email setting. The same salted password-hash/session protections remain.
 
 Content cards use auto-fit grids, tags and labels wrap, and header navigation measures available space before choosing the compact menu. Featured projects appear on Home; use each project's **Featured** checkbox to control that list. Experience entries have their own Company field. Education is not displayed on Certifications.
 
 Media fields have **Choose file** and **Choose from library** controls, image previews, and inline upload feedback. Uploading selects a draft file; publish to make the selection public. Library pages load progressively when there are more than 100 uploads.
 
 For local growth checks, `node scripts/stress-content.mjs stage` temporarily publishes a larger test document and saves the previous document in ignored outputs. After browser checks, run `node scripts/stress-content.mjs restore`. Restore refuses to overwrite a concurrent publication. Do not run these checks against production.
+
+## Owner password and theme
+
+The login screen and owner toolbar both include the theme control. After signing in at `/hq`, choose **Password & security**, enter your current password, and confirm a new password of 12–256 characters. Publish or discard any draft first. A successful change stores only a salted PBKDF2 hash in D1 and signs out every owner session. Sign in again with the new password; the username remains `admin`.
+
+Apply `drizzle/0001_milky_kree.sql` once to each existing database before using this release. For this initialized local database it has already been applied. New databases need both committed migrations in order. Production needs its own migration through the actual deployment's configured database. No production migration was run here.
+
+Once changed in the workspace, the D1 password overrides the bootstrap `CMS_PASSWORD_HASH`. The ignored generated login file is not updated automatically. Keep the password you choose in your own password manager. To recover access with trusted administrative database access, delete the single row in `owner_settings` and all rows in `owner_sessions` in that deployment; this restores its configured bootstrap password and revokes sessions. Changing only the environment hash does not erase a saved password override. Never expose database admin access publicly.
+
+`node scripts/test-owner-password.mjs` checks the password endpoint against an isolated in-memory database, including origin/current-password checks, hashing, repeat rotation, and revocation. It never changes the actual owner password. `node scripts/test-experience.mjs` verifies date ordering and company grouping.
+
+Experience entries are grouped by Company, with ongoing roles and newest start dates first. Use consistent company names and date ranges such as `Jul 2025 — Present` or `2025-07 — 2026-06`. Changing the manual list order does not override public chronological ordering.

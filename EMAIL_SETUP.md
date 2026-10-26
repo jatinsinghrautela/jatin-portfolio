@@ -17,7 +17,7 @@ Official instructions: https://developers.cloudflare.com/email-service/get-start
 
 ## 2. Enable the website's outbound form delivery
 
-The implemented provider is Resend. No API key has been created or added by this task.
+The implemented provider is Resend. The owner has verified the domain and added a local API key. Production credentials remain separate.
 
 1. Create/access your Resend account and add a domain you own.
 2. Verify sending for `jatinsinghrautela.com` using the exact DNS hostnames and values Resend supplies in Cloudflare DNS. Use sending verification only; keep inbound/root MX records with Cloudflare Email Routing. Do not replace those MX records with a second receiving provider.

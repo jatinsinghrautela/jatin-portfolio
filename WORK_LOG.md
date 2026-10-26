@@ -141,3 +141,17 @@
 - Started development server with .dev.vars and confirmed /contact returns HTTP 200.
 - Real provider delivery and Reply-To remain to be checked with a contact-form submission; no test email sent by the agent.
 
+
+## 2026-10-26 — Portfolio usability, search, and owner settings
+- Removed image caption overlays, decorative section/workflow/card numbering, and unused image text overlays; retained meaningful dates and technical quantities.
+- Shared pages now use normal document flow with responsive bottom spacing. The glass navigation remains sticky; case-study section navigation clears it. Project filters wrap at phone widths.
+- Corrected the inherited margin that shifted JR away from the orbit center. Nav hit areas no longer translate on hover, and their descendants inherit a consistent pointer cursor.
+- Added public content search with Ctrl/Command K, global/page scopes, Escape, keyboard selection, focus restoration, and page-result scrolling. Home defaults to global search; other public routes default to their current content. The index rebuilds from published CMS content and excludes the owner workspace.
+- Experience is sorted newest first with ongoing roles first, grouped by company with visible organization headings. The owner's additional Abcd entry and all other content were preserved.
+- Added looping hover glow/light/icon effects and separate sending/provider-accepted email animations, with reduced-motion support. No real email was sent for these checks.
+- Shortened owner route to /hq; /control-room and /cms redirect. Added theme controls on login and editor, and current-password-protected password changes. Only salted hashes persist in the new owner_settings table; successful changes revoke all sessions. Username stays admin.
+- Generated migration 0001_milky_kree.sql and applied it locally only. Production must apply this migration before the release is deployed. Existing local owner password remains unchanged.
+- Validation so far: TypeScript and production build pass; 27 local CMS HTTP checks pass and restore the original content; 9 mocked contact checks pass; 18 isolated password/security checks pass; experience grouping/date tests pass. Password tests never modify the actual owner password.
+- Responsive verification used a temporary same-origin iframe harness at 320, 768, and 1440 pixels for Home, Projects, Experience, Skills, Certifications, About, Contact, both project detail pages, and owner login. All had no page-level horizontal overflow after fixing wrapping filters. Architecture scroll is contained within its diagram. Public-page footer clearance was 48–112 pixels depending on viewport and page. Expanded content included ten projects, twelve skill groups, six certifications, and ten architecture nodes.
+- Restored the owner's original document after growth checks with the version guard; removed the temporary harness. Browser checks verified global search via Ctrl K, page search and selection, sticky nav top position while scrolled, centered orbit margin, and absence of image labels/decorative numbering.
+- Cleared only local test throttle counters, signed in at /hq with the existing local credential, checked the Password & security form, toggled the editor theme and restored it, then signed out. No owner password was changed. Secrets scan confirmed no local password/hash or Resend key in commit candidates.

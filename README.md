@@ -185,7 +185,7 @@ Visual tours use clearly labeled sample interface studies until real application
 - Public content defaults are in `content/default.json`; published edits persist in Cloudflare D1. Media uploads use R2. The CMS can add project pages and edit copy, lists, project details, architecture, workflows, certifications, links, identity, and terminal dialogues.
 - Read [CMS_SETUP.md](CMS_SETUP.md) for local/production access, storage, revisions, media, backups, and security behavior.
 - Read [EMAIL_SETUP.md](EMAIL_SETUP.md) to route contact@jatinsinghrautela.com to Gmail and enable the server-side form sender.
-- No real sender API key or Cloudflare email rule was configured during development. The form reports temporary unavailability until those external steps are completed.
+- The owner has verified Resend, tested Cloudflare email forwarding, and added a local sending key. Production sending secrets must still be configured separately.
 - All phone links are removed. The public downloadable resume is redacted and uses the domain email; the original source resume is unchanged.
 - New full-name branding, favicon, social icons, custom cursors (with native fallbacks), and distinct About/Skills terminals are included.
 
@@ -193,8 +193,14 @@ Validation: `node scripts/test-contact.mjs` (mocked sending, no actual email); `
 
 ## Adaptive content refinements
 
-The owner workspace is now `/control-room` with username `admin`; the existing local password is unchanged. `/cms` redirects to the new route. Image, favicon, and resume fields use upload buttons and a visual library instead of path entry.
+The owner workspace is now `/hq` with username `admin`; the existing local password is unchanged. `/cms` and `/control-room` redirect to the new route. Image, favicon, and resume fields use upload buttons and a visual library instead of path entry.
 
 Repeatable cards and technology lists use auto-fit grids and wrapping. Featured projects appear on Home, navigation measures available space, experience supports per-entry companies, and architecture diagrams adapt to the configured component count. Education is no longer displayed on Certifications.
 
 Local growth checks: `node scripts/stress-content.mjs stage` then `node scripts/stress-content.mjs restore`. These temporarily publish test content and must not run against production.
+
+## Search and navigation
+
+Use the header search icon or **Ctrl/⌘ K**. Home defaults to the entire portfolio; other pages default to their current rendered content. Switch scope inside the dialog, use arrow keys and Enter to open a match, and Escape to close. Public search uses the published content and never indexes the owner editor. The glass header stays visible while scrolling and collapses navigation when space runs out.
+
+Owner login is at `/hq`, with a theme control and **Password & security** settings. Existing `/control-room` and `/cms` links redirect. The new owner-settings database migration must be applied to production before deploying this version; see CMS_SETUP.md.

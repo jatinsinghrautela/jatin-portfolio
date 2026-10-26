@@ -1,3 +1,3 @@
 import {redirect} from 'next/navigation';
 export const metadata={robots:{index:false,follow:false}};
-export default function Page(){redirect('/control-room')}
+export default function Page(){redirect('/hq')}

@@ -9,7 +9,7 @@ export default function ProjectCard({project: p}: {project: PortfolioProject}) {
     <article className={`card project-case project-${p.id}`}>
       <div className="art"><div className="project-orbits" aria-hidden="true"><i/><i/><i/></div><div className="project-glyph" aria-hidden="true">{p.id==='opsradar'?<Radar size={22}/>:<Boxes size={22}/>}</div>
         {p.image ? <img className="project-cover" src={p.image} alt={p.imageAlt} width="1536" height="1024" loading="lazy"/> : <><span className="node">{copy("project-card.001","COMMIT")}</span><span className="connector"/><span className="node">{copy("project-card.002","BUILD")}</span><span className="connector"/><span className="node">{copy("project-card.003","DEPLOY")}</span></>}
-        {p.image && <span className="art-caption">{copy("project-card.004","CONCEPT ART / ")}{p.title.toUpperCase()}</span>}
+
       </div>
       <div className="cardbody">
         <div className="tags">{p.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
