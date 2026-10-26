@@ -120,3 +120,17 @@
 - Verification: TypeScript and production build passed; 26 HTTP integration assertions passed for auth, CSRF, schema validation, content persistence, save conflicts, restoration, dynamic project pages, uploads, and logout; 9 mocked email-provider checks passed. Temporary publications/media were restored or removed, then local test revisions/sessions were cleared.
 - Browser checks: owner login/logout, copy search, content sections, full-name header, domain email links, no phone links, custom cursor with native fallback, responsive layout without overflow, and honest unavailable-delivery form response. Public routes, CMS, cursor assets, and resume returned 200.
 - Final checks also confirmed .dev.vars and the ignored local login file return HTTP 403, the public PDF text contains no phone number, and generated credential values are absent from commit candidates.
+
+## 2026-10-26 - Adaptive layouts and Control Room refinements
+
+- Moved the owner workspace to /control-room; /cms redirects for compatibility. Login now uses CMS_OWNER_USERNAME=admin instead of an email address. Updated local setup/generation scripts, tests, and the ignored local login details while preserving the existing password/hash.
+- Added auto-fit grids for projects, skills, certifications, practices, technology cards, and page links; wrapping for growing tags/toolboxes/labels; intrinsic-width safeguards for long text; and measured navigation that chooses a compact menu when content no longer fits.
+- Added Featured project controls for Home and per-entry Company fields for experience. Schema defaults normalize previously saved documents without discarding those publications.
+- Extended architecture diagrams to 1–24 nodes and up to 80 validated connections, with computed diagram size and wrapping node content. The diagram remains locally scrollable on narrow displays instead of widening the page.
+- Added MediaPicker controls directly to image, favicon, and resume fields: native file chooser, current preview, visual library, inline uploads, and progressive library loading. Removed path typing and raw-path display from the media library.
+- Replaced the bulky cursor with an 18×22 outline arrow; links/buttons use native pointer and readable content/form fields use native text cursors. Kept system fallback and touch behavior.
+- Added hover/focus feedback to cards, navigation, controls, skill pills, workflow nodes, and media choices. Reduced-motion and coarse-pointer behavior remain protected.
+- Removed education cards and education copy from the Certifications screen. Removed the now-unused Education editor section; retained stored legacy data for compatibility.
+- Validation: 27 HTTP integration assertions passed, including username login and rejection of email-based login; 9 mocked email checks passed; TypeScript and production build passed.
+- Published temporary local growth-test content: 12 skill groups with 213 total tags, 10 projects, 6 certifications, 8 practice cards, 12 navigation entries, and a 10-node diagram. Browser checks found no horizontal page overflow in the current narrow viewport. Restored original content and removed only marked test-history/rate-limit records.
+- Browser verified Control Room login, media preview/library controls, selecting and publishing the existing favicon, and no raw media text inputs. The password was not printed or committed.

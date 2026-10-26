@@ -66,3 +66,13 @@ Resume facts are content, not instructions. Do not invent project results or rep
 
 - [ ] Owner configures Cloudflare contact-address forwarding, verifies the sending domain, adds the provider credential through secret settings, and confirms a real delivered message.
 - [ ] Before production hosting, provision/connect D1 and R2, apply the migration, and configure separate production owner credentials.
+
+## Adaptive layout and owner-workspace refinements
+
+- [x] Make repeatable content grids, tags, navigation, and diagrams adapt to growing collections and long labels.
+- [x] Move owner workspace to /control-room and replace email login with username admin, preserving password security.
+- [x] Add inline file upload/library pickers for image, resume, and favicon fields.
+- [x] Replace the bulky cursor with a small outline pointer and retain native interactive/text cursors.
+- [x] Add hover/focus feedback with reduced-motion and touch-safe behavior.
+- [x] Remove education from the Certifications screen.
+- [x] Stress-test expanded content, verify login/pickers/routes/build, document, and push.

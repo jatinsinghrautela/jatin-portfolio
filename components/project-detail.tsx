@@ -10,13 +10,15 @@ const sections=[['overview','Overview'],['architecture','Architecture'],['snapsh
 
 function Architecture({id}:{id:CaseStudyId}) {const {content,copy}=useSiteContent();
   const data=content.caseStudies[id];
-  const positions=[[25,35],[420,35],[420,235],[25,235]];
-  return <figure className="architecture-figure"><div className="diagram-scroll"><svg viewBox="0 0 760 385" role="img" aria-labelledby={`${id}-diagram-title ${id}-diagram-description`}>
-    <title id={`${id}-diagram-title`}>{id === 'opsradar' ? 'Agents and console connect to the API; the API connects to PostgreSQL' : 'Browser to Nginx to Express to MongoDB'}</title>
+  const count=data.nodes.length;const columns=count===1?1:count>6?3:2;
+  const positions=count===4?[[25,35],[420,35],[420,235],[25,235]]:data.nodes.map((_,i)=>[25+(i%columns)*350,35+Math.floor(i/columns)*190]);
+  const diagramWidth=count===4?760:columns*350+15;const diagramHeight=count===4?385:Math.ceil(count/columns)*190+25;
+  return <figure className="architecture-figure"><div className="diagram-scroll"><svg viewBox={`0 0 ${diagramWidth} ${diagramHeight}`} style={{minWidth:columns>2?850:500}} role="img" aria-labelledby={`${id}-diagram-title ${id}-diagram-description`}>
+    <title id={`${id}-diagram-title`}>{`${content.projects.find(p=>p.id===id)?.title||'Project'} component architecture`}</title>
     <desc id={`${id}-diagram-description`}>{data.flow}</desc>
     <defs><marker id={`${id}-arrow`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs>
-    {data.connections.map(([from,to])=>{const a=positions[from],b=positions[to];const horizontal=a[1]===b[1];const x1=horizontal?(a[0]<b[0]?a[0]+290:a[0]):a[0]+145;const y1=horizontal?a[1]+52:a[1]+105;const x2=horizontal?(a[0]<b[0]?b[0]:b[0]+290):b[0]+145;const y2=horizontal?b[1]+52:b[1];return <path key={`${from}-${to}`} className="diagram-wire" d={from===3&&to===1?"M315,287 H365 V185 H565 V140":`M${x1},${y1} L${x2},${y2}`} markerEnd={`url(#${id}-arrow)`}/>})}
-    {data.nodes.map(([label,title,detail],i)=><g key={label} transform={`translate(${positions[i][0]},${positions[i][1]})`}><rect className="diagram-node" width="290" height="105" rx="14"/><circle cx="23" cy="24" r="3" className="diagram-dot"/><text x="36" y="28" className="diagram-label">{label}</text><text x="20" y="58" className="diagram-title">{title}</text><text x="20" y="82" className="diagram-caption">{detail}</text></g>)}
+    {data.connections.map(([from,to])=>{const a=positions[from],b=positions[to];const horizontal=a[1]===b[1];const x1=horizontal?(a[0]<b[0]?a[0]+290:a[0]):a[0]+145;const y1=horizontal?a[1]+52:a[1]+(b[1]>a[1]?105:0);const x2=horizontal?(a[0]<b[0]?b[0]:b[0]+290):b[0]+145;const y2=horizontal?b[1]+52:b[1]+(b[1]>a[1]?0:105);return <path key={`${from}-${to}`} className="diagram-wire" d={count===4&&from===3&&to===1?"M315,287 H365 V185 H565 V140":`M${x1},${y1} L${x2},${y2}`} markerEnd={`url(#${id}-arrow)`}/>})}
+    {data.nodes.map(([label,title,detail],i)=><g key={i} transform={`translate(${positions[i][0]},${positions[i][1]})`}><rect className="diagram-node" width="290" height="105" rx="14"/><foreignObject x="16" y="12" width="258" height="82"><div className="diagram-node-copy"><span>{label}</span><strong>{title}</strong><p>{detail}</p></div></foreignObject></g>)}
   </svg></div><figcaption>{data.flow}</figcaption></figure>;
 }
 

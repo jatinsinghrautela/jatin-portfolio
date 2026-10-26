@@ -82,7 +82,8 @@
         "PostgreSQL",
         "React console"
       ],
-      "plannedRepository": "https://github.com/jatinsinghrautela/OpsRadar"
+      "plannedRepository": "https://github.com/jatinsinghrautela/OpsRadar",
+      "featured": true
     },
     {
       "id": "roach",
@@ -112,7 +113,8 @@
         "Express API",
         "MongoDB"
       ],
-      "plannedRepository": "https://github.com/jatinsinghrautela/Roach"
+      "plannedRepository": "https://github.com/jatinsinghrautela/Roach",
+      "featured": true
     }
   ],
   "caseStudies": {
@@ -313,7 +315,8 @@
         "Configure",
         "Deploy",
         "Observe"
-      ]
+      ],
+      "company": "Comviva Technologies Ltd"
     },
     {
       "date": "Dec 2023 — Jun 2025",
@@ -335,7 +338,8 @@
         "Inspect",
         "Automate",
         "Resolve"
-      ]
+      ],
+      "company": "Comviva Technologies Ltd"
     },
     {
       "date": "Aug 2023 — Nov 2023",
@@ -354,7 +358,8 @@
         "Learn",
         "Build",
         "Improve"
-      ]
+      ],
+      "company": "Comviva Technologies Ltd"
     }
   ],
   "practices": [
@@ -737,9 +742,9 @@
     "contact-form.009": "WHAT ARE YOU THINKING?",
     "contact-form.010.placeholder": "Tell me a little about your idea…",
     "contact-form.011": "Website",
-    "certifications.label": "CERTIFICATIONS / LEARNING & FOUNDATIONS",
+    "certifications.label": "CERTIFICATIONS / VERIFIED KNOWLEDGE",
     "certifications.heading": "Built on solid foundations.",
-    "certifications.intro": "Professional certification and formal education that support my engineering practice.",
+    "certifications.intro": "Professional certifications that support my engineering practice.",
     "certifications.verify": "Verify certification ↗",
     "education.label": "EDUCATION",
     "resume.label": "THE COMPLETE PROFILE",
