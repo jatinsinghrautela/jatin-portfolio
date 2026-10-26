@@ -155,3 +155,10 @@ git config core.hooksPath .githooks
 ```
 
 The pre-commit hook rejects a different author or committer identity. Hooks are local safeguards and can be explicitly bypassed.
+
+## Portfolio sections and artwork
+
+Navigation now separates Home, Projects, Experience, Skills, Credentials, About, and Contact.
+Experience includes animated role milestones and workflow markers, disabled for reduced-motion preferences.
+The celestial theme switch retains the saved theme preference.
+See [ASSETS.md](ASSETS.md) for the two generated artwork files, their prompts, and provenance.

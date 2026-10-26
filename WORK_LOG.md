@@ -48,3 +48,14 @@
 - Completed guarded force push. Remote main contains only the fresh snapshot and subsequent commits authored and committed by the verified account. Local and remote tips matched after verification.
 - Guard validation passed with bundled Git: verified identity returned 0; forbiddenlinkers22 identity was rejected with exit 1. The default system Git lacks the hook subcommand; bundled Git was used for direct hook testing.
 - Follow-up: GitHub API confirms main is the default branch and its complete three-commit history maps author and committer only to jatinsinghrautela. GitHub documentation says contributor displays can take about 24 hours to refresh after history rewrites. The sidebar may therefore remain stale temporarily.
+
+## 2026-10-26 - Focused pages and visual refresh
+
+- Added /experience, /skills, and /credentials. About now focuses on the person; Home is a shorter introduction with selected work and links to deeper pages.
+- Moved role history to a glass timeline with a travelling highlight, pulsing milestones, staggered entrances, and animated role workflow markers. Reduced-motion CSS disables the animations.
+- Replaced visible Studio branding with a jr. monogram and Jatin / DevOps Engineer identity; updated metadata and favicon.
+- Replaced the text theme control with an animated celestial switch: sun, clouds, moon craters, and stars. Preserved persisted theme preference and accessible name / pressed state.
+- Retained typing terminals on About, Skills, and Projects, as well as code tabs and project filtering.
+- Generated two original conceptual illustrations with the built-in image tool, inspected them, and integrated optimized WebP assets. Prompt set and provenance are in ASSETS.md. No copyright-free or exclusivity guarantee is claimed.
+- TypeScript and production build passed. All seven routes and both image URLs returned HTTP 200.
+- Browser review confirmed About separation, Experience layout, Skills content, Credentials layout, new navigation, sun/moon interaction, and theme persistence. Reviewed light and dark appearances in the current narrow browser viewport.
