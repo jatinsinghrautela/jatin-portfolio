@@ -47,3 +47,4 @@
 - Original history remains recoverable from outputs/before-contributor-cleanup.bundle.
 - Completed guarded force push. Remote main contains only the fresh snapshot and subsequent commits authored and committed by the verified account. Local and remote tips matched after verification.
 - Guard validation passed with bundled Git: verified identity returned 0; forbiddenlinkers22 identity was rejected with exit 1. The default system Git lacks the hook subcommand; bundled Git was used for direct hook testing.
+- Follow-up: GitHub API confirms main is the default branch and its complete three-commit history maps author and committer only to jatinsinghrautela. GitHub documentation says contributor displays can take about 24 hours to refresh after history rewrites. The sidebar may therefore remain stale temporarily.
