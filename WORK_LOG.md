@@ -168,3 +168,11 @@
 - Tested contact UI with two intercepted local mock responses: overlay present while sending, absent after success, then typed confirmation; failure removes the overlay and shows only the error. No real email or provider request was sent. Temporary mock/resize harness removed.
 - Checked live hovered experience cards: animation, transform, and translate all remain none while moving between heading and body.
 - Final checks: TypeScript and clean production build pass; nine mocked provider tests pass. Browser confirms zero results for empty search, normal matches after typing, a 34px trigger, restored animated callouts, and the company-independent introduction. No content collections, credentials, or production services were changed.
+
+## 2026-10-26 — Matching dashboard artwork and typed copy
+- Applied the same soft oval radial mask and corner radius to dashboard artwork in both themes, retaining the existing image, drift animation, and floating callouts.
+- Added sequential terminal-style typing for both headline lines and the introduction. Hidden full-copy sizing reserves the responsive layout; screen readers receive complete static text and reduced-motion preferences bypass typing. Typing pauses offscreen or in a background tab.
+- Kept all copy editable through the existing CMS fields. Page search reads the complete text rather than an in-progress typed fragment.
+- TypeScript and production build passed. Restarted local development and warmed page modules after a stalled first request; dashboard now responds HTTP 200.
+- Browser verification: light and dark use identical computed mask, 514.425 × 342.95px image dimensions, and centered translation. The mask follows the bitmap's intrinsic aspect ratio, eliminating the light-theme rectangle caused by masking the taller letterboxed container.
+- Typing starts with empty visible strings and finishes with the complete editable headline/introduction. Headline height remains 242.8125px and introduction height remains 85.5px before and after typing at the checked desktop viewport; no horizontal overflow. Saved the light-theme preview in ignored outputs.
