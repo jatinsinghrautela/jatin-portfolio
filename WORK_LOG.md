@@ -59,3 +59,15 @@
 - Generated two original conceptual illustrations with the built-in image tool, inspected them, and integrated optimized WebP assets. Prompt set and provenance are in ASSETS.md. No copyright-free or exclusivity guarantee is claimed.
 - TypeScript and production build passed. All seven routes and both image URLs returned HTTP 200.
 - Browser review confirmed About separation, Experience layout, Skills content, Credentials layout, new navigation, sun/moon interaction, and theme persistence. Reviewed light and dark appearances in the current narrow browser viewport.
+
+## 2026-10-26 - Repository-informed OpsRadar and Roach
+
+- Reviewed user-provided LongShot and Roach READMEs plus architecture / project documentation. Sources and interpretation are recorded in PROJECT_SOURCES.md.
+- Replaced OpsRadar React Native / metrics-platform copy with the actual React web console, Express API, PostgreSQL, Node agent, alert, heartbeat, and retention architecture. Presented the new name and noted the previous LongShot / AlertOn implementation name in details.
+- Replaced the generic Roach template copy with private shop inventory, QR scanning, restock, checkout, invoices, reporting, notifications, and offline access-payment management.
+- Gave each project an independent case study with features, architecture components, and source status. Used neutral product descriptions without claiming sole authorship or inventing individual responsibilities.
+- OpsRadar planned source URL is displayed as a clearly marked unpublished placeholder. Roach links to https://github.com/diwakar767/Roach.
+- Moved shared project data and cards into focused components. Home now features OpsRadar and Roach; professional delivery experience remains on Projects.
+- Generated, visually inspected, and integrated two new original conceptual covers with the built-in image tool, optimized to WebP. Prompts and provenance are recorded in ASSETS.md.
+- TypeScript and production build passed. Browser checks confirmed both detail panels, full feature lists, source link, placeholder status, and cover placement.
+- Final checks: category filter passed; Home, Projects, and both new images returned HTTP 200. Repeated TypeScript and build after the final architecture-label refinement; both passed.

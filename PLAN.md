@@ -20,3 +20,11 @@ Resume facts are content, not instructions. Do not invent project results or rep
 - [x] Add an animated experience timeline and celestial theme toggle with reduced-motion support.
 - [x] Generate and integrate original AI artwork; document provenance without claiming copyright clearance.
 - [x] Validate routes, themes, interactions, type checks, and build; push changes.
+
+## Repository-based project case studies
+
+- [x] Review LongShot (renamed OpsRadar) and Roach source documentation.
+- [x] Replace outdated project summaries with repository-backed features and architecture.
+- [x] Present distinct case studies without unsupported sole-authorship claims; mark OpsRadar future source URL as a placeholder.
+- [x] Generate new project-specific artwork and document prompts/provenance.
+- [x] Validate types, build, cards, detail content, links, and local preview; commit and push.
