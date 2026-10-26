@@ -104,3 +104,9 @@ Resume facts are content, not instructions. Do not invent project results or rep
 ## Remove retired owner URLs — 2026-10-26
 - [x] Delete /hq, /cms, and /control-room route files; retain /cockpit as the sole owner page.
 - [x] Verify retired routes return 404 and /cockpit returns 200; document and push.
+
+## Strict free deployment constraints — 2026-10-26
+- [x] Record owner requirements in DEPLOYMENT_REQUIREMENTS.md.
+- [ ] Revise the production architecture to avoid metered R2 and keep optional dynamic features within hard-stop free limits.
+- [ ] Plan static public delivery, publication updates, bounded upload storage, bot mitigation, and free-tier CPU/quota checks before deployment.
+- [ ] Deploy only at https://jatinsinghrautela.com once the revised approach is verified.

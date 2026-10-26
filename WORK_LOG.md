@@ -186,3 +186,8 @@
 - Removed the /hq, /cms, and /control-room page files completely at the owner's request. /cockpit is the only owner page. Updated active setup documentation; earlier work-log entries remain historical.
 - Internal authenticated /api/cms endpoints remain in place for the functioning editor.
 - Restarted the local server and verified /cockpit returns 200 and all three removed routes return 404. TypeScript and diff checks passed.
+
+## 2026-10-26 — Free-only hosting and traffic preferences
+- Recorded the canonical domain and strict no-paid-services/no-artificial-traffic requirements. Checked current official Cloudflare documentation for static assets, Worker/D1 limits, R2 metering, and free bot protection.
+- Flagged that the earlier R2 deployment proposal needs revision and the current server-rendered CMS needs production adaptation. No Cloudflare resources, subscriptions, bot rules, or production deployments were changed.
+- Explicitly documented that domain renewal is separate, bot elimination cannot be guaranteed, and free quotas do not provide an unconditional uptime guarantee.
