@@ -9,6 +9,8 @@ async function readJson(request:Request){if(!request.headers.get('Content-Type')
 async function limit(env:Cloudflare.Env,request:Request,kind:string,max:number,seconds:number){if(!env.DB)return false;const ip=request.headers.get('CF-Connecting-IP')||'local';const key=await digest(`${env.CMS_PASSWORD_HASH||'portfolio'}:${kind}:${ip}`);const now=Date.now();await env.DB.prepare('DELETE FROM request_limits WHERE expires_at < ?').bind(now).run();const row=await env.DB.prepare('INSERT INTO request_limits (key,count,expires_at) VALUES (?,1,?) ON CONFLICT(key) DO UPDATE SET count=count+1 RETURNING count').bind(key,now+seconds*1000).first<{count:number}>();return !!row&&row.count<=max}
 async function authenticated(request:Request,env:Cloudflare.Env){if(!env.DB||!env.CMS_PASSWORD_HASH)return false;const token=request.headers.get('Cookie')?.split(';').map(s=>s.trim()).find(s=>s.startsWith(cookieName+'='))?.slice(cookieName.length+1);if(!token||!/^[a-f0-9]{64}$/.test(token))return false;const row=await env.DB.prepare('SELECT expires_at FROM owner_sessions WHERE token_hash=?').bind(await digest(`${env.CMS_PASSWORD_HASH}:${token}`)).first<{expires_at:number}>();return !!row&&row.expires_at>Date.now()}
 async function passwordMatches(password:string,hash:string){const[algorithm,rounds,saltHex,expected]=hash.split('$');if(algorithm!=='pbkdf2'||rounds!=='100000'||!saltHex||!expected)return false;const salt=Uint8Array.from(saltHex.match(/../g)||[],h=>parseInt(h,16));const key=await crypto.subtle.importKey('raw',encoder.encode(password),'PBKDF2',false,['deriveBits']);const bits=await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt,iterations:100000},key,256);const actual=Array.from(new Uint8Array(bits)).map(v=>v.toString(16).padStart(2,'0')).join('');let difference=actual.length^expected.length;for(let i=0;i<actual.length;i++)difference|=actual.charCodeAt(i)^(expected.charCodeAt(i)||0);return difference===0}
+async function ownerHash(env:Cloudflare.Env){const saved=await env.DB!.prepare('SELECT password_hash FROM owner_settings WHERE id=1').first<{password_hash:string}>();return saved?.password_hash||env.CMS_PASSWORD_HASH!}
+async function hashPassword(password:string){const salt=crypto.getRandomValues(new Uint8Array(16));const key=await crypto.subtle.importKey('raw',encoder.encode(password),'PBKDF2',false,['deriveBits']);const bits=new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt,iterations:100000},key,256));const hex=(v:Uint8Array)=>Array.from(v).map(n=>n.toString(16).padStart(2,'0')).join('');return `pbkdf2$100000$${hex(salt)}$${hex(bits)}`}
 const cookie=(request:Request,value:string,age:number)=>`${cookieName}=${value}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${age}${new URL(request.url).protocol==='https:'?'; Secure':''}`;
 async function readContent(env:Cloudflare.Env){const row=await env.DB?.prepare('SELECT version,body FROM published_content WHERE id=1').first<{version:number;body:string}>();return {version:row?.version||0,content:row?contentSchema.parse(JSON.parse(row.body)):defaultContent}}
 export async function portfolioApi(request:Request,env:Cloudflare.Env):Promise<Response|null>{const url=new URL(request.url),path=url.pathname;if(!path.startsWith('/api/'))return null;
@@ -31,14 +33,25 @@ export async function portfolioApi(request:Request,env:Cloudflare.Env):Promise<R
    if(!env.DB||!env.CMS_PASSWORD_HASH||!env.CMS_OWNER_USERNAME)return json({error:'Owner login needs server configuration. See CMS_SETUP.md.'},503);
    if(!await limit(env,request,'login',5,900))return json({error:'Too many sign-in attempts. Try again in 15 minutes.'},429);
    const body=await readJson(request);if(typeof body.username!=='string'||typeof body.password!=='string'||body.password.length>256||body.username.length>64)return json({error:'Invalid username or password.'},401);
-   const valid=await passwordMatches(body.password,env.CMS_PASSWORD_HASH);if(body.username.toLowerCase()!==env.CMS_OWNER_USERNAME.toLowerCase()||!valid)return json({error:'Invalid username or password.'},401);
-   const token=Array.from(crypto.getRandomValues(new Uint8Array(32))).map(v=>v.toString(16).padStart(2,'0')).join('');await env.DB.prepare('DELETE FROM owner_sessions WHERE expires_at < ?').bind(Date.now()).run();await env.DB.prepare('INSERT INTO owner_sessions (token_hash,expires_at) VALUES (?,?)').bind(await digest(`${env.CMS_PASSWORD_HASH}:${token}`),Date.now()+28800000).run();return json({authenticated:true},200,{'Set-Cookie':cookie(request,token,28800)});
+   const currentHash=await ownerHash(env);const valid=await passwordMatches(body.password,currentHash);if(body.username.toLowerCase()!==env.CMS_OWNER_USERNAME.toLowerCase()||!valid)return json({error:'Invalid username or password.'},401);
+   const token=Array.from(crypto.getRandomValues(new Uint8Array(32))).map(v=>v.toString(16).padStart(2,'0')).join('');await env.DB.prepare('DELETE FROM owner_sessions WHERE expires_at < ?').bind(Date.now()).run();const inserted=await env.DB.prepare('INSERT INTO owner_sessions (token_hash,expires_at) SELECT ?,? WHERE COALESCE((SELECT password_hash FROM owner_settings WHERE id=1),?)=?').bind(await digest(`${env.CMS_PASSWORD_HASH}:${token}`),Date.now()+28800000,env.CMS_PASSWORD_HASH,currentHash).run();if(!inserted.meta.changes)return json({error:'Password changed. Please sign in again.'},401);return json({authenticated:true},200,{'Set-Cookie':cookie(request,token,28800)});
   }
  }
  if(path.startsWith('/api/cms/')){
   if(!await authenticated(request,env))return json({error:'Please sign in as the owner.'},401);
   if(request.method!=='GET'&&!sameOrigin(request))return json({error:'Request origin is not allowed.'},403);
   const db=env.DB!;
+  if(path==='/api/cms/password'&&request.method==='POST'){
+   if(!await limit(env,request,'password',5,900))return json({error:'Too many password attempts. Try again in 15 minutes.'},429);
+   const body=await readJson(request);if(typeof body.currentPassword!=='string'||typeof body.newPassword!=='string'||body.currentPassword.length>256||body.newPassword.length<12||body.newPassword.length>256)return json({error:'Use a new password between 12 and 256 characters.'},400);
+   const currentHash=await ownerHash(env);if(!await passwordMatches(body.currentPassword,currentHash))return json({error:'The current password is incorrect.'},400);
+   if(body.newPassword===body.currentPassword)return json({error:'Choose a different password.'},400);
+   const nextHash=await hashPassword(body.newPassword);
+   const results=await db.batch([db.prepare('INSERT INTO owner_settings (id,password_hash,updated_at) VALUES (1,?,?) ON CONFLICT(id) DO UPDATE SET password_hash=excluded.password_hash,updated_at=excluded.updated_at WHERE owner_settings.password_hash=?').bind(nextHash,Date.now(),currentHash),db.prepare('DELETE FROM owner_sessions')]);
+   if(!results[0].meta.changes)return json({error:'Password changed in another session. Please sign in again.'},409,{'Set-Cookie':cookie(request,'',0)});
+   return json({changed:true},200,{'Set-Cookie':cookie(request,'',0)});
+  }
+
   if(path==='/api/cms/content'){
    if(request.method==='GET')return json(await readContent(env));
    if(request.method==='PUT'){
