@@ -84,3 +84,10 @@ Resume facts are content, not instructions. Do not invent project results or rep
 - [x] Add continuous hover and honest sending/sent animations; stabilize cursor hit areas.
 - [x] Move owner workspace to /hq; add theme control and authenticated password changes.
 - [x] Verify responsive layouts, auth/password security, build; document and push owner commits.
+
+## Search, resizing, dashboard and email refinement — 2026-10-26
+- [x] Hide empty-query suggestions and reduce the search trigger.
+- [x] Make navigation sizing independent of its collapsed state; verify shrink/expand cycles.
+- [x] Restore dashboard floating artwork details and use a company-independent introduction.
+- [x] Replace inline sending animation with an overlay flight and delayed typed confirmation.
+- [x] Stabilize experience hover effects; verify and document, then push.
