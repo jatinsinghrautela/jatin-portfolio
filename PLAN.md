@@ -33,3 +33,11 @@ Resume facts are content, not instructions. Do not invent project results or rep
 
 - [x] Replace the public Roach source link with a clearly marked planned URL under jatinsinghrautela.
 - [x] Make the shared placeholder message use each project's name.
+
+## Dedicated project case studies
+
+- [x] Replace expandable cards with concise previews and dedicated page links.
+- [x] Add case-study pages for OpsRadar, Roach, and professional delivery work.
+- [x] Add scroll-linked section navigation, architecture diagrams, visual previews, technologies, and engineering takeaways.
+- [x] Add direction-aware reveal animations, reading progress, and reduced-motion support.
+- [x] Verify navigation, section tracking, direct routes, types, build, and responsive appearance; document and push.

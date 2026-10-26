@@ -1,0 +1,3 @@
+'use client';
+import {Controls} from './studio';
+export default function SiteHeader({page}:{page:string}){return <nav><a className="brand" href="/"><span className="brand-mark">jr<span>.</span></span><span className="brand-caption">JATIN<span>DEVOPS ENGINEER</span></span></a><div className="navlinks">{[['home','/','Home'],['projects','/projects','Projects'],['experience','/experience','Experience'],['skills','/skills','Skills'],['credentials','/credentials','Credentials'],['about','/about','About'],['contact','/contact','Contact']].map(([id,url,label])=><a className={id===page?'active':''} aria-current={id===page?'page':undefined} key={id} href={url}>{label}</a>)}</div><Controls/></nav>}

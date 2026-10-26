@@ -23,3 +23,7 @@ Descriptions reflect shop-scoped inventory, QR-assisted workflows, restock, chec
 ## Presentation
 
 Both projects have independent case studies using neutral product descriptions. They were group projects according to the user. No claim of sole authorship or invented individual contribution has been added. Project scope is described separately from professional experience at Comviva. Artwork is conceptual and labeled; it does not depict actual screens.
+
+## Case-study visuals
+
+Reviewed repository trees on 2026-10-26. No application screenshots were found: LongShot contained branding images; Roach contained React logos and a marketing inventory image. The detail pages therefore use CSS/HTML interface studies with explicit illustrative/sample-data labels. They are not presented as actual screenshots. Technologies and engineering takeaways derive from the reviewed project architecture; they do not invent the user's personal contribution history.

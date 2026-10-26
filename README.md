@@ -162,3 +162,10 @@ Navigation now separates Home, Projects, Experience, Skills, Credentials, About,
 Experience includes animated role milestones and workflow markers, disabled for reduced-motion preferences.
 The celestial theme switch retains the saved theme preference.
 See [ASSETS.md](ASSETS.md) for the two generated artwork files, their prompts, and provenance.
+
+## Dedicated case-study pages
+
+Project cards now link to `/projects/opsradar`, `/projects/roach`, and `/projects/pipeline`.
+Each page has Overview, Architecture, Visual tour, Technologies, and Learnings sections.
+Section links support direct hash navigation; the active item follows scrolling. Reveals, reading progress, and diagram signal animations respect reduced-motion settings.
+Visual tours use clearly labeled sample interface studies until real application screenshots are supplied.

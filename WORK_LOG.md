@@ -78,3 +78,16 @@
 - Updated the shared placeholder message to use the actual project title.
 - Original repository references remain in PROJECT_SOURCES.md for content provenance only.
 - Validation: TypeScript and diff checks passed; browser confirmed the Roach coming-soon label and planned jatinsinghrautela/Roach URL with no external source button.
+
+## 2026-10-26 - Dedicated project case-study pages
+
+- Replaced expandable project cards with concise ideas and accessible links to /projects/opsradar, /projects/roach, and /projects/pipeline. Home and Projects use the same compact cards.
+- Extracted shared header navigation so detail pages preserve site branding, theme controls, and active Projects navigation.
+- Added overview, architecture, visual tour, technologies, and learnings sections with direct hash links, scroll-linked active state, a sticky section menu, and reading progress.
+- Added animated section reveals that follow scroll direction and work when revisiting sections. Motion preferences disable reveal blur/translation and diagram movement; all text remains visible without JavaScript.
+- Added accessible SVG component diagrams with animated signal paths and written architecture explanations. Professional delivery diagram is explicitly conceptual, based on resume-backed tools.
+- Inspected both repository trees for application screenshots; only branding/marketing images were present. Visual tours are clearly labeled illustrative interface studies with sample data, not actual screenshots. No fabricated screenshots or personal learning claims were added.
+- Preserved coming-soon personal GitHub URLs for OpsRadar and Roach. Added next-project and all-projects navigation.
+- TypeScript and production build passed. Projects and all three detail routes returned HTTP 200.
+- Browser checks verified card navigation, direct section links, automatic active sections, upward direction detection, progress updates, visual-tour switching, return navigation, Roach content, and theme toggle. Reviewed narrow-screen layout and OpsRadar diagram.
+- Final dark-theme review confirmed Technologies tracking and no horizontal document overflow in the current browser viewport.
