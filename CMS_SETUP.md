@@ -63,7 +63,7 @@ Unused uploads can be removed from Media library. Files referenced by current co
 
 ## Adaptive content and route migration
 
-The owner workspace is **Cockpit** at `/cockpit`. `/hq`, `/cms`, and `/control-room` redirect for existing links. API routes retain `/api/cms/...`; the route name is branding, not an authentication safeguard. Set `CMS_OWNER_USERNAME=admin` in production, replacing the earlier owner-email setting. The same salted password-hash/session protections remain.
+The owner workspace is **Cockpit** at `/cockpit`. API routes retain `/api/cms/...`; the route name is branding, not an authentication safeguard. Set `CMS_OWNER_USERNAME=admin` in production, replacing the earlier owner-email setting. The same salted password-hash/session protections remain.
 
 Content cards use auto-fit grids, tags and labels wrap, and header navigation measures available space before choosing the compact menu. Featured projects appear on Home; use each project's **Featured** checkbox to control that list. Experience entries have their own Company field. Education is not displayed on Certifications.
 

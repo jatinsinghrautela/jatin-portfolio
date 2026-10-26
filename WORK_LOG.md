@@ -181,3 +181,8 @@
 - Moved the owner editor to /cockpit and renamed its heading/page title to Cockpit. Updated setup documentation and the local login URL without changing credentials.
 - /hq, /cms, and /control-room each redirect directly to /cockpit.
 - Verified /cockpit returns HTTP 200 with the expected title; all three legacy routes return HTTP 307 with Location /cockpit. TypeScript and diff checks pass.
+
+## 2026-10-26 — Remove retired owner routes
+- Removed the /hq, /cms, and /control-room page files completely at the owner's request. /cockpit is the only owner page. Updated active setup documentation; earlier work-log entries remain historical.
+- Internal authenticated /api/cms endpoints remain in place for the functioning editor.
+- Restarted the local server and verified /cockpit returns 200 and all three removed routes return 404. TypeScript and diff checks passed.
