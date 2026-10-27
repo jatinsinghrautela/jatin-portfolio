@@ -1,3 +1,5 @@
+> **Production hosting:** use [FREE_DEPLOYMENT.md](FREE_DEPLOYMENT.md) and `wrangler.free.jsonc`. This free-only static frontend/D1 setup supersedes the earlier R2/Vinext production proposal. The original Vinext development workflow is retained locally.
+
 # vinext-starter
 
 A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.

@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import ts from 'typescript';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
-const source=fs.readFileSync('server/portfolio-api.ts','utf8').replace("import {contentSchema,defaultContent} from '../lib/content-model';",'const contentSchema = {}; const defaultContent = {};');
+const source=fs.readFileSync('server/portfolio-api.ts','utf8').replace("import {contentSchema,defaultContent} from '../lib/content-model';",'const contentSchema = {}; const defaultContent = {};').replace("import {d1Media} from './d1-media';",'const d1Media = async()=>null;').replace("import {verifiedHuman} from './turnstile';",'const verifiedHuman = async()=>true;');
 const exported={};Function('exports',ts.transpile(source,{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}))(exported);
 const sqlite=new DatabaseSync(':memory:');
 sqlite.exec('CREATE TABLE owner_settings(id INTEGER PRIMARY KEY,password_hash TEXT NOT NULL,updated_at INTEGER NOT NULL); CREATE TABLE owner_sessions(token_hash TEXT PRIMARY KEY,expires_at INTEGER NOT NULL); CREATE TABLE request_limits(key TEXT PRIMARY KEY,count INTEGER NOT NULL,expires_at INTEGER NOT NULL);');

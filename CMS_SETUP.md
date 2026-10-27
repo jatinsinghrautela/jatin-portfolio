@@ -1,3 +1,5 @@
+> **Production update:** see [FREE_DEPLOYMENT.md](FREE_DEPLOYMENT.md). Production uploads now use D1 with a 1 MB file limit and a 100-file / 50 MB library cap; no R2 subscription is required. The older local R2 instructions below describe the original Vinext preview, not the free-only production deployment.
+
 # Owner CMS and production setup
 
 ## Local owner login
@@ -16,7 +18,7 @@ The CMS supports public copy, identity/SEO, image/file pickers, links, navigatio
 2. Add/remove/reorder list entries. For new projects, use **New project URL slug / Add project** so the corresponding case-study and workflow records are created together.
 3. Keep slugs stable after publication. New project pages use `/projects/your-slug`. The fixed OpsRadar/Roach URLs still work; a removed project displays a not-found state.
 4. Search **Page copy & media** by the visible text. Fields are grouped by the source component and include headings, descriptions, labels, and alternate text. Image fields show a file picker and visual library.
-5. Use **Media library** to upload PNG, JPEG, WebP, or PDF files up to 6 MB. Choose a file directly in an image/media field, Identity → Resume, or Identity → Favicon. Existing artwork and uploaded files can be selected from the visual library. SVG uploads are intentionally excluded. Files uploaded here are public.
+5. Use **Media library** to upload PNG, JPEG, WebP, or PDF files up to 1 MB. Choose a file directly in an image/media field, Identity → Resume, or Identity → Favicon. Existing artwork and uploaded files can be selected from the visual library. SVG uploads are intentionally excluded. Files uploaded here are public.
 6. **Publish changes** writes to D1. Changes are not public until published. Other open tabs may need refresh. Concurrent edits are rejected instead of silently overwriting.
 7. Use **Revision history** to load a previous publication, then publish it to restore. The last 20 previous revisions are retained.
 8. Export content regularly as JSON. Import validates the document before loading it as an unpublished edit. Media URLs remain tied to the deployment's R2 bucket; back up media separately.

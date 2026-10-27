@@ -17,3 +17,11 @@ References checked:
 - https://developers.cloudflare.com/r2/get-started/
 - https://developers.cloudflare.com/r2/pricing/
 - https://developers.cloudflare.com/bots/get-started/bot-fight-mode/
+
+## Implemented production approach
+
+- Static pre-rendered public pages with client navigation and one cached public-content request per full load. Publications appear within about 30 seconds; saved/bundled public content remains available on API failure. Newly added projects require their content snapshot to be available.
+- D1 uploads are capped at 1 MB per file and 100 files / 50 MB total. Production has no R2 binding.
+- Free Turnstile protects Contact and Cockpit login; email attempts are capped at 90/day and 2,700/month.
+- Account Free plan was explicitly confirmed by the owner; OAuth billing read is unavailable. Deployment checks reject known paid subscriptions or require that confirmation. This does not itself enforce Cloudflare billing.
+- Curated GitHub defaults are the chosen launch content. Domain-level bot controls and GitHub build connection require owner dashboard configuration.

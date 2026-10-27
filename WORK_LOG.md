@@ -191,3 +191,18 @@
 - Recorded the canonical domain and strict no-paid-services/no-artificial-traffic requirements. Checked current official Cloudflare documentation for static assets, Worker/D1 limits, R2 metering, and free bot protection.
 - Flagged that the earlier R2 deployment proposal needs revision and the current server-rendered CMS needs production adaptation. No Cloudflare resources, subscriptions, bot rules, or production deployments were changed.
 - Explicitly documented that domain renewal is separate, bot elimination cannot be guaranteed, and free quotas do not provide an unconditional uptime guarantee.
+
+## 2026-10-26 — Free-only deployment preparation
+- Added a separate static Vite/React build and routing adapters that preserve existing pages, project details, themes, search, animation and Cockpit editing. Public pages/assets bypass the Worker; a 30-second cached content API refresh supplies published CMS edits, with saved/default content fallback on API failure. No polling or production traffic generators were added.
+- Added D1 media storage, max 1 MB/file, 100 files and 50 MB/library, with atomic quota guards and retained-reference deletion protection. Production has no R2 binding; original local Vinext/R2 preview remains separate.
+- Added server-verified Turnstile with hostname/action checks for contact and login, and outgoing mail budgets of 90/day and 2,700/month. Local free preview alone disables Turnstile.
+- Owner supplied D1 database ID and public Turnstile site key, completed Wrangler OAuth, explicitly confirmed Workers Free, selected curated GitHub launch content, and installed the Turnstile secret via a private prompt. OAuth lacks billing/DNS/bot-settings read permissions; no broader token was requested.
+- Recorded Free confirmation in ignored local state. Guarded deployment checks known paid subscriptions when readable, otherwise requires explicit owner attestation, and requires all production secret names before domain publication.
+- Prepared an unrouted production Worker (no domain, workers.dev or preview URLs), applied three D1 migrations remotely, and installed the Resend key and a separate production password hash as Worker secrets. No secret values were printed or committed. The public domain is not yet attached.
+- Added FREE_DEPLOYMENT.md with owner steps, limitations, secure secret entry, bot controls, manual post-launch checks and GitHub automatic-deployment setup.
+- Validation: TypeScript passes; static build produces ten pre-rendered routes; 27 local CMS integration assertions, 18 isolated password checks, nine mocked contact checks, 18 free media/Turnstile checks and Worker cache/publish-invalidation tests pass. No actual email or production website simulations were sent.
+
+## 2026-10-27 — Launch checks
+- Owner confirmed Bot Fight Mode and AI blocking enabled. Proceeding with the authorized custom-domain launch; existing email routing and root MX records remain outside the deployment changes.
+- Re-ran TypeScript, 18 free-storage/security checks, Worker cache checks, and the ten-route static build successfully. Scanned repository candidates and built static assets against private local credentials; no matches found.
+- Confirmed author and committer identity is Jatin Singh Rautela <jatinsinghrautela@gmail.com>. Production checks use only Cloudflare control-plane APIs, without automated visits to the public website.

@@ -1,0 +1,74 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "jatin-portfolio",
+  "main": "deployment/worker.ts",
+  "compatibility_date": "2026-05-15",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "assets": {
+    "directory": "./dist/free/client",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": [
+      "/api/*",
+      "/hq",
+      "/hq/*",
+      "/cms",
+      "/cms/*",
+      "/control-room",
+      "/control-room/*"
+    ]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "portfolio-db",
+      "database_id": "600234d5-882b-4f45-943e-e7ae9640a325",
+      "migrations_dir": "drizzle"
+    }
+  ],
+  "vars": {
+    "MEDIA_STORE": "d1",
+    "REQUIRE_TURNSTILE": "true",
+    "CMS_OWNER_USERNAME": "admin",
+    "CONTACT_FROM": "Jatin Portfolio <contact@jatinsinghrautela.com>",
+    "CONTACT_TO": "jatinsinghrautela@gmail.com",
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAFm8m_EVJTaJCuhc"
+  },
+  "observability": {
+    "enabled": false
+  },
+  "routes": [
+    {
+      "pattern": "jatinsinghrautela.com",
+      "custom_domain": true
+    }
+  ],
+  "env": {
+    "local": {
+      "name": "jatin-portfolio-local",
+      "workers_dev": false,
+      "preview_urls": false,
+      "vars": {
+        "MEDIA_STORE": "d1",
+        "REQUIRE_TURNSTILE": "false",
+        "CMS_OWNER_USERNAME": "admin",
+        "CONTACT_FROM": "Jatin Portfolio <contact@jatinsinghrautela.com>",
+        "CONTACT_TO": "jatinsinghrautela@gmail.com",
+        "TURNSTILE_SITE_KEY": ""
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "portfolio-db",
+          "database_id": "600234d5-882b-4f45-943e-e7ae9640a325",
+          "migrations_dir": "drizzle"
+        }
+      ]
+    }
+  },
+  "account_id": "69c89f1a116f9f8708a9d824b70d9f8f"
+}

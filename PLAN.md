@@ -107,6 +107,14 @@ Resume facts are content, not instructions. Do not invent project results or rep
 
 ## Strict free deployment constraints — 2026-10-26
 - [x] Record owner requirements in DEPLOYMENT_REQUIREMENTS.md.
-- [ ] Revise the production architecture to avoid metered R2 and keep optional dynamic features within hard-stop free limits.
-- [ ] Plan static public delivery, publication updates, bounded upload storage, bot mitigation, and free-tier CPU/quota checks before deployment.
+- [x] Revise the production architecture to avoid metered R2 and keep optional dynamic features within hard-stop free limits.
+- [x] Plan static public delivery, publication updates, bounded upload storage, bot mitigation, and free-tier CPU/quota checks before deployment.
 - [ ] Deploy only at https://jatinsinghrautela.com once the revised approach is verified.
+
+## Free-only production implementation — 2026-10-26
+- [x] Build a separate static public frontend with a bounded cached content refresh, preserving every existing screen/theme/animation and dynamic project pages.
+- [x] Add D1 upload storage with hard file/library limits, removing any production R2 dependency.
+- [x] Protect login/contact with free Turnstile and bound outgoing email usage.
+- [x] Add guarded Cloudflare deployment/CI configuration and detailed owner setup instructions.
+- [x] Verify static preview, migrations, CMS publishing, uploads, security and quota fallbacks; push without deploying until account prerequisites are ready.
+

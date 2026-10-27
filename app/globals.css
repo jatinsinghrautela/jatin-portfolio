@@ -98,3 +98,5 @@ main{width:100%;padding-bottom:clamp(48px,7vw,96px);min-width:0;display:flow-roo
 .dashboard-copy h1>em{display:block}
 .dashboard-copy .lead .dashboard-type-caret{height:1em;vertical-align:-.1em}
 @media(prefers-reduced-motion:reduce){.dashboard-type-ink{display:none}.dashboard-type-reserve{visibility:visible}.dashboard-type-caret{display:none}}
+
+#portfolio-root{display:flex;flex-direction:column;min-height:100dvh}#portfolio-root>main,#portfolio-root>.case-page{flex:1;width:100%}.human-check{margin-top:18px;min-width:0}

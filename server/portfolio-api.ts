@@ -1,4 +1,6 @@
 import {contentSchema,defaultContent} from '../lib/content-model';
+import {d1Media} from './d1-media';
+import {verifiedHuman} from './turnstile';
 const encoder=new TextEncoder();
 const cookieName='portfolio_owner';
 const headers={'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'};
@@ -15,6 +17,7 @@ const cookie=(request:Request,value:string,age:number)=>`${cookieName}=${value};
 async function readContent(env:Cloudflare.Env){const row=await env.DB?.prepare('SELECT version,body FROM published_content WHERE id=1').first<{version:number;body:string}>();return {version:row?.version||0,content:row?contentSchema.parse(JSON.parse(row.body)):defaultContent}}
 export async function portfolioApi(request:Request,env:Cloudflare.Env):Promise<Response|null>{const url=new URL(request.url),path=url.pathname;if(!path.startsWith('/api/'))return null;
  try{
+ if(path==='/api/public-config'&&request.method==='GET')return json({required:env.REQUIRE_TURNSTILE==='true',siteKey:env.TURNSTILE_SITE_KEY||''});
  if(path==='/api/content'&&request.method==='GET')return json(await readContent(env));
  if(path==='/api/contact'&&request.method==='POST'){
   if(!sameOrigin(request))return json({error:'Request origin is not allowed.'},403);
@@ -23,6 +26,8 @@ export async function portfolioApi(request:Request,env:Cloudflare.Env):Promise<R
   const body=await readJson(request);const name=typeof body.name==='string'?body.name.trim():'',email=typeof body.email==='string'?body.email.trim():'',message=typeof body.message==='string'?body.message.trim():'';
   if(body.website)return json({error:'Unable to submit this message.'},400);
   if(name.length<1||name.length>120||/[\r\n]/.test(name)||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||email.length>254||message.length<10||message.length>4000||typeof body.startedAt!=='number'||Date.now()-body.startedAt<1500||Date.now()-body.startedAt>86400000||typeof body.requestId!=='string'||!/^[a-f0-9-]{36}$/.test(body.requestId))return json({error:'Please check your name, email, and message, then try again.'},400);
+  if(!await verifiedHuman(request,env,body.turnstileToken,'contact'))return json({error:'Please complete the verification and try again.'},400);
+  if(env.MEDIA_STORE==='d1'){const date=new Date(),day=date.toISOString().slice(0,10),month=day.slice(0,7);for(const [period,max,ttl] of [[day,90,172800000],[month,2700,2678400000]] as const){const budget=await env.DB!.prepare('INSERT INTO request_limits (key,count,expires_at) VALUES (?,1,?) ON CONFLICT(key) DO UPDATE SET count=count+1 WHERE count<? RETURNING count').bind(`mail:${period}`,Date.now()+ttl,max).first();if(!budget)return json({error:'Message capacity has been reached. Please use the contact email or social links.'},429)}}
   const response=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:`Bearer ${env.RESEND_API_KEY}`,'Content-Type':'application/json','Idempotency-Key':`contact/${body.requestId}`},body:JSON.stringify({from:env.CONTACT_FROM,to:[env.CONTACT_TO],reply_to:email,subject:`Portfolio enquiry from ${name}`,text:`Name: ${name}\nEmail: ${email}\n\n${message}`}),signal:AbortSignal.timeout(10000)});const result=await response.json() as {id?:string};if(!response.ok||!result.id)return json({error:'The message could not be delivered right now. Please try again later.'},502);return json({sent:true});
  }
  if(path==='/api/cms/session'){
@@ -33,6 +38,7 @@ export async function portfolioApi(request:Request,env:Cloudflare.Env):Promise<R
    if(!env.DB||!env.CMS_PASSWORD_HASH||!env.CMS_OWNER_USERNAME)return json({error:'Owner login needs server configuration. See CMS_SETUP.md.'},503);
    if(!await limit(env,request,'login',5,900))return json({error:'Too many sign-in attempts. Try again in 15 minutes.'},429);
    const body=await readJson(request);if(typeof body.username!=='string'||typeof body.password!=='string'||body.password.length>256||body.username.length>64)return json({error:'Invalid username or password.'},401);
+   if(!await verifiedHuman(request,env,body.turnstileToken,'login'))return json({error:'Please complete the verification and try again.'},400);
    const currentHash=await ownerHash(env);const valid=await passwordMatches(body.password,currentHash);if(body.username.toLowerCase()!==env.CMS_OWNER_USERNAME.toLowerCase()||!valid)return json({error:'Invalid username or password.'},401);
    const token=Array.from(crypto.getRandomValues(new Uint8Array(32))).map(v=>v.toString(16).padStart(2,'0')).join('');await env.DB.prepare('DELETE FROM owner_sessions WHERE expires_at < ?').bind(Date.now()).run();const inserted=await env.DB.prepare('INSERT INTO owner_sessions (token_hash,expires_at) SELECT ?,? WHERE COALESCE((SELECT password_hash FROM owner_settings WHERE id=1),?)=?').bind(await digest(`${env.CMS_PASSWORD_HASH}:${token}`),Date.now()+28800000,env.CMS_PASSWORD_HASH,currentHash).run();if(!inserted.meta.changes)return json({error:'Password changed. Please sign in again.'},401);return json({authenticated:true},200,{'Set-Cookie':cookie(request,token,28800)});
   }
@@ -65,6 +71,7 @@ export async function portfolioApi(request:Request,env:Cloudflare.Env):Promise<R
   }
   if(path==='/api/cms/revisions'&&request.method==='GET'){const version=url.searchParams.get('version');if(version){const row=await db.prepare('SELECT version,body FROM content_revisions WHERE version=?').bind(Number(version)).first<{version:number;body:string}>();return row?json({version:row.version,content:JSON.parse(row.body)}):json({error:'Revision not found.'},404)}return json({revisions:(await db.prepare('SELECT version,created_at FROM content_revisions ORDER BY version DESC LIMIT 20').all()).results})}
   if(path==='/api/cms/assets'){
+   if(env.MEDIA_STORE==='d1')return d1Media(request,env);
    if(!env.BUCKET)return json({error:'Media storage is not configured.'},503);
    if(request.method==='GET'){const list=await env.BUCKET.list({limit:100,...(url.searchParams.get('cursor')?{cursor:url.searchParams.get('cursor')!}:{})});return json({assets:list.objects.map(o=>({url:`/api/assets/${o.key}`,size:o.size})),cursor:list.truncated?list.cursor:undefined})}
    if(request.method==='DELETE'){const key=url.searchParams.get('key')||'';if(!/^[a-f0-9-]{36}\.(png|jpg|webp|pdf)$/.test(key))return json({error:'Invalid asset.'},400);const current=await readContent(env);if(JSON.stringify(current.content).includes(`/api/assets/${key}`)||await db.prepare('SELECT version FROM content_revisions WHERE instr(body,?)>0 LIMIT 1').bind(`/api/assets/${key}`).first())return json({error:'This asset is used by published content or a retained revision.'},409);await env.BUCKET.delete(key);return json({deleted:true})}
@@ -76,7 +83,7 @@ export async function portfolioApi(request:Request,env:Cloudflare.Env):Promise<R
    }
   }
  }
- if(path.startsWith('/api/assets/')&&request.method==='GET'){const key=path.slice('/api/assets/'.length);if(!/^[a-f0-9-]{36}\.(png|jpg|webp|pdf)$/.test(key)||!env.BUCKET)return json({error:'Not found.'},404);const object=await env.BUCKET.get(key);if(!object)return json({error:'Not found.'},404);return new Response(object.body,{headers:{'Content-Type':object.httpMetadata?.contentType||'application/octet-stream','X-Content-Type-Options':'nosniff','Cache-Control':'public, max-age=31536000, immutable',...(key.endsWith('.pdf')?{'Content-Disposition':'attachment; filename="resume.pdf"'}:{})}})}
+ if(path.startsWith('/api/assets/')&&request.method==='GET'){if(env.MEDIA_STORE==='d1')return d1Media(request,env);const key=path.slice('/api/assets/'.length);if(!/^[a-f0-9-]{36}\.(png|jpg|webp|pdf)$/.test(key)||!env.BUCKET)return json({error:'Not found.'},404);const object=await env.BUCKET.get(key);if(!object)return json({error:'Not found.'},404);return new Response(object.body,{headers:{'Content-Type':object.httpMetadata?.contentType||'application/octet-stream','X-Content-Type-Options':'nosniff','Cache-Control':'public, max-age=31536000, immutable',...(key.endsWith('.pdf')?{'Content-Disposition':'attachment; filename="resume.pdf"'}:{})}})}
  return null;
  }catch{return json({error:'The service is temporarily unavailable. Please try again shortly.'},503)}
 }
