@@ -65,7 +65,7 @@ Resume facts are content, not instructions. Do not invent project results or rep
 ## External activation remaining
 
 - [ ] Owner configures Cloudflare contact-address forwarding, verifies the sending domain, adds the provider credential through secret settings, and confirms a real delivered message.
-- [ ] Before production hosting, provision/connect D1 and R2, apply the migration, and configure separate production owner credentials.
+- [x] Production D1, migrations and separate owner credentials configured; the free-only approach below supersedes R2.
 
 ## Adaptive layout and owner-workspace refinements
 
@@ -109,7 +109,7 @@ Resume facts are content, not instructions. Do not invent project results or rep
 - [x] Record owner requirements in DEPLOYMENT_REQUIREMENTS.md.
 - [x] Revise the production architecture to avoid metered R2 and keep optional dynamic features within hard-stop free limits.
 - [x] Plan static public delivery, publication updates, bounded upload storage, bot mitigation, and free-tier CPU/quota checks before deployment.
-- [ ] Deploy only at https://jatinsinghrautela.com once the revised approach is verified.
+- [x] Deploy only at https://jatinsinghrautela.com once the revised approach is verified.
 
 ## Free-only production implementation — 2026-10-26
 - [x] Build a separate static public frontend with a bounded cached content refresh, preserving every existing screen/theme/animation and dynamic project pages.
@@ -117,4 +117,10 @@ Resume facts are content, not instructions. Do not invent project results or rep
 - [x] Protect login/contact with free Turnstile and bound outgoing email usage.
 - [x] Add guarded Cloudflare deployment/CI configuration and detailed owner setup instructions.
 - [x] Verify static preview, migrations, CMS publishing, uploads, security and quota fallbacks; push without deploying until account prerequisites are ready.
+
+
+## Launch follow-up — 2026-10-27
+- [x] Attach canonical custom domain and verify through Cloudflare control-plane API.
+- [ ] Owner manually checks HTTPS, Cockpit, publication and real contact delivery.
+- [ ] Owner connects GitHub Builds in Cloudflare for automatic code deployments.
 

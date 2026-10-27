@@ -206,3 +206,9 @@
 - Owner confirmed Bot Fight Mode and AI blocking enabled. Proceeding with the authorized custom-domain launch; existing email routing and root MX records remain outside the deployment changes.
 - Re-ran TypeScript, 18 free-storage/security checks, Worker cache checks, and the ten-route static build successfully. Scanned repository candidates and built static assets against private local credentials; no matches found.
 - Confirmed author and committer identity is Jatin Singh Rautela <jatinsinghrautela@gmail.com>. Production checks use only Cloudflare control-plane APIs, without automated visits to the public website.
+
+## 2026-10-27 — Production deployment completed
+- Pushed implementation commit 8eef7b0 under the owner's configured identity. Guarded deployment verified account attestation/secrets and confirmed no pending D1 migrations.
+- Deployed Worker version cfa53270-1aad-401f-b977-1ec6174ac15e to jatinsinghrautela.com. Cloudflare control-plane API confirms the hostname is attached to jatin-portfolio in production; workers.dev and preview URLs are both disabled.
+- No production website requests, automated browser checks, monitoring pings or real contact messages were generated. Mail routing/MX configuration was not modified by our commands.
+- Owner manual HTTPS/login/publication/contact checks and dashboard authorization for GitHub Builds remain. Production login is stored only in ignored outputs/production-owner-credentials.txt. FREE_DEPLOYMENT.md contains the exact follow-up steps.
