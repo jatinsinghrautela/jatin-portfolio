@@ -212,3 +212,9 @@
 - Deployed Worker version cfa53270-1aad-401f-b977-1ec6174ac15e to jatinsinghrautela.com. Cloudflare control-plane API confirms the hostname is attached to jatin-portfolio in production; workers.dev and preview URLs are both disabled.
 - No production website requests, automated browser checks, monitoring pings or real contact messages were generated. Mail routing/MX configuration was not modified by our commands.
 - Owner manual HTTPS/login/publication/contact checks and dashboard authorization for GitHub Builds remain. Production login is stored only in ignored outputs/production-owner-credentials.txt. FREE_DEPLOYMENT.md contains the exact follow-up steps.
+
+## 2026-10-30 — Published project repository links
+- Confirmed public jatinsinghrautela/OpsRadar and jatinsinghrautela/Roach repositories through the connected GitHub account.
+- Existing project URLs already match the real repositories. Replaced coming-soon/code-only placeholder panels with responsive GitHub buttons opening in a separate tab with safe link attributes and project-specific accessible names.
+- Retained existing CMS data fields, so published content and owner edits remain compatible. New editable copy keys prevent older saved placeholder text from overriding the released source-code panel.
+- Verification: TypeScript and static build pass; both generated case studies contain the exact GitHub anchors with safe new-tab attributes and no unpublished notices. Repository/static-asset credential scan passes.
