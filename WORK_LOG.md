@@ -218,3 +218,4 @@
 - Existing project URLs already match the real repositories. Replaced coming-soon/code-only placeholder panels with responsive GitHub buttons opening in a separate tab with safe link attributes and project-specific accessible names.
 - Retained existing CMS data fields, so published content and owner edits remain compatible. New editable copy keys prevent older saved placeholder text from overriding the released source-code panel.
 - Verification: TypeScript and static build pass; both generated case studies contain the exact GitHub anchors with safe new-tab attributes and no unpublished notices. Repository/static-asset credential scan passes.
+- Published commit f79af26 and deployed version 97712be6-3afd-4708-9e5f-9081f65f1b22 to the canonical custom domain. No database changes or automated production visits were needed.
