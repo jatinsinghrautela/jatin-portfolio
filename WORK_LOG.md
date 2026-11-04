@@ -235,3 +235,11 @@
 - Made the project grid size its rows evenly based on content and placed card actions at the bottom of each card.
 - Production build and card order checks passed. The local browser measured all three desktop cards at 361 × 672 pixels with matching button placement.
 - Pushed commit 556df80 and deployed Cloudflare version d709d361-3f8f-4774-b920-dd6a90ff136f to jatinsinghrautela.com.
+
+## Schoolglass Desk thumbnail
+
+- Used built-in image generation to produce a dedicated Schoolglass Desk card illustration. Optimized it as WebP and added an optional CMS thumbnail field with the existing cover as its fallback.
+- The illustration is used on the Home and Projects cards. The case-study cover and screenshot gallery continue to use application captures.
+
+Prompt: Create a landscape 3:2 Schoolglass Desk portfolio thumbnail. Stylized 3D isometric product illustration matching the accompanying portfolio’s cream ceramic, smoked glass and warm orange/teal miniature objects on a warm ivory studio background. Depict a central teal glass school administration dashboard with three unmistakable visual motifs: attendance checkmarks on a class register, a weekly timetable grid, and a report card with grade bars. Include a miniature school building silhouette or architectural model and a slim stack of report cards beside the dashboard. Use warm natural soft shadows and muted amber accents. Simple premium composition, crisp, principal objects comfortably centered for crop, upper right quiet for a website badge. No people, no readable text, no logos, no captions, no watermarks. This is conceptual artwork, not an actual UI screenshot.
+- TypeScript, the production build, and the generated HTML checks passed for both project cards and the existing case-study image.

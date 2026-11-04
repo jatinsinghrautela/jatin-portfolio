@@ -4,11 +4,12 @@ import Link from 'next/link';
 import {Radar,Boxes,ArrowUpRight} from 'lucide-react';
 import type {PortfolioProject} from './project-data';
 
-export default function ProjectCard({project: p}: {project: PortfolioProject}) {const {content,copy}=useSiteContent();
+export default function ProjectCard({project: p}: {project: PortfolioProject}) {const {copy}=useSiteContent();
+  const image = p.thumbnail || p.image;
   return (
     <article className={`card project-case project-${p.id}`}>
       <div className="art"><div className="project-orbits" aria-hidden="true"><i/><i/><i/></div><div className="project-glyph" aria-hidden="true">{p.id==='opsradar'?<Radar size={22}/>:<Boxes size={22}/>}</div>
-        {p.image ? <img className="project-cover" src={p.image} alt={p.imageAlt} width="1536" height="1024" loading="lazy"/> : <><span className="node">{copy("project-card.001","COMMIT")}</span><span className="connector"/><span className="node">{copy("project-card.002","BUILD")}</span><span className="connector"/><span className="node">{copy("project-card.003","DEPLOY")}</span></>}
+        {image ? <img className="project-cover" src={image} alt={p.thumbnail ? "" : p.imageAlt} width="1536" height="1024" loading="lazy"/> : <><span className="node">{copy("project-card.001","COMMIT")}</span><span className="connector"/><span className="node">{copy("project-card.002","BUILD")}</span><span className="connector"/><span className="node">{copy("project-card.003","DEPLOY")}</span></>}
 
       </div>
       <div className="cardbody">

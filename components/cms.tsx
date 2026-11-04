@@ -11,7 +11,7 @@ const groups=[['account','Password & security'],['identity','Identity & files'],
 const label=(key:string)=>key.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/[-_]/g,' ').replace(/^./,c=>c.toUpperCase());
 function Field({value,path,onChange}:{value:Json;path:string[];onChange:(path:string[],value:Json)=>void}){
  const name=path[path.length-1];
- const media=typeof value==='string'&&(['image','favicon','resume','src'].includes(name)||name.endsWith('.src'));
+ const media=typeof value==='string'&&(['image','thumbnail','favicon','resume','src'].includes(name)||name.endsWith('.src'));
  if(media)return <MediaPicker title={label(name)} value={value as string} document={name==='resume'} onChange={url=>onChange(path,url)}/>;
  if(typeof value==='string'){const long=value.length>110||value.includes('\n');return <label className="cms-field"><span>{label(name)}</span>{long?<textarea value={value} onChange={e=>onChange(path,e.target.value)} rows={3}/>:<input value={value} onChange={e=>onChange(path,e.target.value)}/>}</label>}
  if(typeof value==='boolean')return <label className="cms-checkbox"><input type="checkbox" checked={value} onChange={e=>onChange(path,e.target.checked)}/><span>{label(name)}</span></label>;

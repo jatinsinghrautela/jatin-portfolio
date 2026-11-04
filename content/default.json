@@ -98,6 +98,7 @@
       ],
       "description": "A multi-school management workspace for academic records, attendance, fees, and school communications.",
       "story": "Schoolglass Desk gives school leaders, teachers, and students role-based views of their daily work. A shared API serves the React web workspace and an Expo mobile client. School membership scopes records, and an audit trail captures changes to sensitive workflows.",
+      "thumbnail": "/images/schoolglass-desk-thumbnail.webp",
       "image": "/images/snapshots/schoolglass-dashboard.webp",
       "imageAlt": "Schoolglass Desk web dashboard in dark mode",
       "features": [
