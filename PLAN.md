@@ -147,4 +147,4 @@ Resume facts are content, not instructions. Do not invent project results or rep
 ## Schoolglass Desk thumbnail
 
 - [x] Generate and integrate an illustration of school administration.
-- [ ] Verify the card and deploy to Cloudflare.
+- [x] Verify the card and deploy to Cloudflare.
