@@ -137,3 +137,9 @@ Resume facts are content, not instructions. Do not invent project results or rep
 - [x] Add the project card and case study, including repository link and academic workflows.
 - [x] Add a separate, responsive and editable Snapshots section to all three case studies.
 - [x] Verify the built pages and deploy to Cloudflare.
+
+## Project card order and sizing
+
+- [x] Move Schoolglass Desk ahead of Roach in the shared project list.
+- [x] Equalize project card dimensions and align the action area while allowing text to wrap.
+- [ ] Verify and deploy the update.

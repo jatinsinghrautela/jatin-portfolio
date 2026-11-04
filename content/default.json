@@ -86,37 +86,6 @@
       "featured": true
     },
     {
-      "id": "roach",
-      "title": "Roach",
-      "category": "Development",
-      "tags": [
-        "React",
-        "Redux Toolkit",
-        "Express",
-        "MongoDB",
-        "Docker Compose"
-      ],
-      "description": "A shop inventory application that connects product records, QR scanning, stock movements, and checkout.",
-      "story": "Roach gives each shop a private workspace for its products, stock movements, invoices, and alerts. A React front end is served through Nginx, which forwards API and image requests to Express. MongoDB stores the inventory and sales records, while Docker Compose brings the services together.",
-      "image": "/images/roach-inventory.webp",
-      "imageAlt": "Conceptual illustration of product shelves, a scanner, an inventory panel, and a checkout receipt",
-      "features": [
-        "Product records with photos or camera stills, prices, costs, quantities, and reorder levels.",
-        "Downloadable product QR labels, camera scanning, and name or SKU search as a fallback.",
-        "Restocking, multi-item checkout, stock movement history, and invoices with sale-time line snapshots.",
-        "Sales reports for units, revenue, cost, and profit, plus low-stock and out-of-stock notifications.",
-        "Shop-scoped accounts, a 30-day trial, and operator-recorded offline payments that extend access without deleting data."
-      ],
-      "architecture": [
-        "React + Redux",
-        "Nginx",
-        "Express API",
-        "MongoDB"
-      ],
-      "plannedRepository": "https://github.com/jatinsinghrautela/Roach",
-      "featured": true
-    },
-    {
       "id": "school-management",
       "title": "Schoolglass Desk",
       "category": "Development",
@@ -145,6 +114,37 @@
         "MySQL"
       ],
       "plannedRepository": "https://github.com/jatinsinghrautela/School-Management",
+      "featured": true
+    },
+    {
+      "id": "roach",
+      "title": "Roach",
+      "category": "Development",
+      "tags": [
+        "React",
+        "Redux Toolkit",
+        "Express",
+        "MongoDB",
+        "Docker Compose"
+      ],
+      "description": "A shop inventory application that connects product records, QR scanning, stock movements, and checkout.",
+      "story": "Roach gives each shop a private workspace for its products, stock movements, invoices, and alerts. A React front end is served through Nginx, which forwards API and image requests to Express. MongoDB stores the inventory and sales records, while Docker Compose brings the services together.",
+      "image": "/images/roach-inventory.webp",
+      "imageAlt": "Conceptual illustration of product shelves, a scanner, an inventory panel, and a checkout receipt",
+      "features": [
+        "Product records with photos or camera stills, prices, costs, quantities, and reorder levels.",
+        "Downloadable product QR labels, camera scanning, and name or SKU search as a fallback.",
+        "Restocking, multi-item checkout, stock movement history, and invoices with sale-time line snapshots.",
+        "Sales reports for units, revenue, cost, and profit, plus low-stock and out-of-stock notifications.",
+        "Shop-scoped accounts, a 30-day trial, and operator-recorded offline payments that extend access without deleting data."
+      ],
+      "architecture": [
+        "React + Redux",
+        "Nginx",
+        "Express API",
+        "MongoDB"
+      ],
+      "plannedRepository": "https://github.com/jatinsinghrautela/Roach",
       "featured": true
     }
   ],

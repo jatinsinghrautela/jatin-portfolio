@@ -228,3 +228,9 @@
 - Converted seven captures to WebP for static delivery. A read-only D1 check found no existing production CMS publication, so the release can use the updated bundled content without a data migration.
 - Verification passed for TypeScript, the 11-route production build, and all seven local images across the three generated case studies. The new card renders on both Home and Projects.
 - Pushed implementation commit 95e232f and deployed Cloudflare version 38f5cfbb-12ee-4b9b-82bc-0b7c2589bbda to jatinsinghrautela.com. Verified through the deployment output and local build without sending automated traffic to the public site.
+
+## Project card order and sizing
+
+- Set the shared project order to OpsRadar, Schoolglass Desk, then Roach on Home and Projects. The live D1 database has no saved content override.
+- Made the project grid size its rows evenly based on content and placed card actions at the bottom of each card.
+- Production build and card order checks passed. The local browser measured all three desktop cards at 361 × 672 pixels with matching button placement.
