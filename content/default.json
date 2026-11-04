@@ -115,6 +115,37 @@
       ],
       "plannedRepository": "https://github.com/jatinsinghrautela/Roach",
       "featured": true
+    },
+    {
+      "id": "school-management",
+      "title": "Schoolglass Desk",
+      "category": "Development",
+      "tags": [
+        "React",
+        "Express",
+        "MySQL",
+        "Expo",
+        "Docker Compose"
+      ],
+      "description": "A multi-school management workspace for academic records, attendance, fees, and school communications.",
+      "story": "Schoolglass Desk gives school leaders, teachers, and students role-based views of their daily work. A shared API serves the React web workspace and an Expo mobile client. School membership scopes records, and an audit trail captures changes to sensitive workflows.",
+      "image": "/images/snapshots/schoolglass-dashboard.webp",
+      "imageAlt": "Schoolglass Desk web dashboard in dark mode",
+      "features": [
+        "Organization and school onboarding, role-based access, and school switching.",
+        "Academic terms, enrollment history, timetable changes, and attendance registers.",
+        "Weighted report cards with reviewed publication and downloadable PDFs.",
+        "Fee schedules, concessions, balances, and manual receipts.",
+        "Mobile daily views for students and guardians."
+      ],
+      "architecture": [
+        "React web workspace",
+        "Expo mobile client",
+        "Express API",
+        "MySQL"
+      ],
+      "plannedRepository": "https://github.com/jatinsinghrautela/School-Management",
+      "featured": true
     }
   ],
   "caseStudies": {
@@ -203,7 +234,19 @@
           "Long-running host agent setup"
         ]
       ],
-      "scope": "Alerts and host liveness are the focus. Time-series metrics, log indexing, and distributed tracing are outside this implementation."
+      "scope": "Alerts and host liveness are the focus. Time-series metrics, log indexing, and distributed tracing are outside this implementation.",
+      "snapshots": [
+        {
+          "src": "/images/snapshots/opsradar-mobile-inbox.webp",
+          "alt": "OpsRadar Prism mobile alert inbox in light mode",
+          "caption": "OpsRadar mobile design preview · Alert inbox"
+        },
+        {
+          "src": "/images/snapshots/opsradar-mobile-settings.webp",
+          "alt": "OpsRadar Prism mobile settings in dark mode",
+          "caption": "OpsRadar mobile design preview · Settings"
+        }
+      ]
     },
     "roach": {
       "subtitle": "From a product on a shelf to a recorded sale.",
@@ -290,7 +333,111 @@
           "Product identification and stock actions"
         ]
       ],
-      "scope": "Payment extensions are recorded offline by an operator. There is no card-payment gateway. Email features require SMTP configuration."
+      "scope": "Payment extensions are recorded offline by an operator. There is no card-payment gateway. Email features require SMTP configuration.",
+      "snapshots": [
+        {
+          "src": "/images/snapshots/roach-inventory.webp",
+          "alt": "Roach inventory dashboard with stock totals and a list of sample shop products",
+          "caption": "Inventory dashboard with sample products"
+        },
+        {
+          "src": "/images/snapshots/roach-add-product.webp",
+          "alt": "Roach product entry form with image, pricing, quantity, and reorder fields",
+          "caption": "Product entry and stock settings"
+        }
+      ]
+    },
+    "school-management": {
+      "subtitle": "One workspace for the day-to-day work of a school.",
+      "challenge": "School staff need to coordinate attendance, grades, fees, and communications across classes and campuses while keeping student records scoped to the people responsible for them.",
+      "nodes": [
+        [
+          "React web",
+          "School and platform workspaces",
+          "React + Vite"
+        ],
+        [
+          "Express API",
+          "Membership checks, academic workflows, and audit events",
+          "Node.js + Express"
+        ],
+        [
+          "MySQL",
+          "School records, enrollment history, and report versions",
+          "MySQL"
+        ],
+        [
+          "Expo mobile",
+          "Student and guardian daily views",
+          "React Native + Expo"
+        ]
+      ],
+      "flow": "Web and mobile clients call the shared API. The API checks school membership and roles before reading or updating MySQL records.",
+      "connections": [
+        [
+          0,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "previews": [],
+      "snapshots": [
+        {
+          "src": "/images/snapshots/schoolglass-dashboard.webp",
+          "alt": "Dark web dashboard with school navigation and summary panels",
+          "caption": "School dashboard with sample records"
+        },
+        {
+          "src": "/images/snapshots/schoolglass-mobile.webp",
+          "alt": "Schoolglass Desk dashboard on a mobile screen",
+          "caption": "School dashboard on mobile"
+        },
+        {
+          "src": "/images/snapshots/schoolglass-report-card.webp",
+          "alt": "Published school report card layout",
+          "caption": "Published report card"
+        }
+      ],
+      "takeaways": [
+        [
+          "Enforce membership at the API",
+          "Treat each school as its own access boundary and filter academic records to the user’s role."
+        ],
+        [
+          "Keep published reports reproducible",
+          "Store a publication snapshot so later grading or template edits do not rewrite an earlier report."
+        ]
+      ],
+      "technologies": [
+        [
+          "React + Vite",
+          "Web workspace and platform console"
+        ],
+        [
+          "React Native + Expo",
+          "Mobile daily views"
+        ],
+        [
+          "Express",
+          "Shared API and access checks"
+        ],
+        [
+          "MySQL",
+          "Relational school records and history"
+        ],
+        [
+          "Docker Compose",
+          "Local database setup"
+        ]
+      ],
+      "scope": "This case study covers the school workspace, academic publication, and mobile daily views."
     }
   },
   "experience": [
@@ -603,6 +750,44 @@
           ]
         ]
       }
+    ],
+    "school-management": [
+      {
+        "name": "Academic reporting",
+        "title": "From marks to a published report card",
+        "steps": [
+          [
+            "Set up the term",
+            "Define classes, subjects, and grading rules."
+          ],
+          [
+            "Record marks",
+            "Teachers submit the registers for their assigned subjects."
+          ],
+          [
+            "Review and publish",
+            "Management publishes completed reports for the students who can view them."
+          ]
+        ]
+      },
+      {
+        "name": "Daily attendance",
+        "title": "Track classroom attendance",
+        "steps": [
+          [
+            "Open the register",
+            "Select the class and school date."
+          ],
+          [
+            "Record attendance",
+            "Save attendance for the class in one batch."
+          ],
+          [
+            "Review the record",
+            "Review attendance and process any corrections through the approval workflow."
+          ]
+        ]
+      }
     ]
   },
   "copy": {
@@ -636,7 +821,7 @@
     "portfolio.028": "PROJECT EXPLORER",
     "portfolio.029": "Under the hood.",
     "portfolio.030": "Beyond the interface.",
-    "portfolio.031": "Personal projects exploring lightweight alerting and inventory workflows, developed independently of my work at Comviva.",
+    "portfolio.031": "Personal projects spanning operational alerting, shop inventory, and school management.",
     "portfolio.032": "SAY HELLO",
     "portfolio.033": "Great things start",
     "portfolio.034": "with a hello.",
@@ -752,7 +937,9 @@
     "resume.download": "Download resume ↓",
     "contact.sending": "Sending your message…",
     "contact.sent": "Your message has been sent. Thank you for getting in touch.",
-    "projects.filter.all": "All"
+    "projects.filter.all": "All",
+    "project-detail.snapshots.label": "SNAPSHOTS",
+    "project-detail.snapshots.title": "Inside the application."
   },
   "certifications": [
     {

@@ -219,3 +219,11 @@
 - Retained existing CMS data fields, so published content and owner edits remain compatible. New editable copy keys prevent older saved placeholder text from overriding the released source-code panel.
 - Verification: TypeScript and static build pass; both generated case studies contain the exact GitHub anchors with safe new-tab attributes and no unpublished notices. Repository/static-asset credential scan passes.
 - Published commit f79af26 and deployed version 97712be6-3afd-4708-9e5f-9081f65f1b22 to the canonical custom domain. No database changes or automated production visits were needed.
+
+## 2026-11-04 — Schoolglass Desk and project snapshots
+
+- Added the Schoolglass Desk project card and case study from School-Management, with role-based workflows, web and mobile architecture, and a source link.
+- Added responsive snapshot galleries with descriptive alt text, captions, full-size image links and file pickers in Cockpit. The existing interactive workflows have their own section.
+- Used documented Schoolglass Desk screenshots and the OpsRadar repository’s Prism mobile design previews. Captured Roach’s inventory and product entry screens from its actual React frontend with an isolated local API fixture and sample inventory.
+- Converted seven captures to WebP for static delivery. A read-only D1 check found no existing production CMS publication, so the release can use the updated bundled content without a data migration.
+- Verification passed for TypeScript, the 11-route production build, and all seven local images across the three generated case studies. The new card renders on both Home and Projects.

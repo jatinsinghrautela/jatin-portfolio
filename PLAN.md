@@ -130,3 +130,10 @@ Resume facts are content, not instructions. Do not invent project results or rep
 - [x] Replace unpublished notices with accessible, CMS-editable GitHub links.
 - [x] Build, verify rendered project links, commit/push and deploy using the free-only workflow.
 
+
+## Schoolglass Desk and project snapshots — 2026-11-04
+
+- [x] Verify Schoolglass Desk features and architecture from the source repository.
+- [x] Add the project card and case study, including repository link and academic workflows.
+- [x] Add a separate, responsive and editable Snapshots section to all three case studies.
+- [ ] Verify the built pages and deploy to Cloudflare.

@@ -100,3 +100,39 @@ main{width:100%;padding-bottom:clamp(48px,7vw,96px);min-width:0;display:flow-roo
 @media(prefers-reduced-motion:reduce){.dashboard-type-ink{display:none}.dashboard-type-reserve{visibility:visible}.dashboard-type-caret{display:none}}
 
 #portfolio-root{display:flex;flex-direction:column;min-height:100dvh}#portfolio-root>main,#portfolio-root>.case-page{flex:1;width:100%}.human-check{margin-top:18px;min-width:0}
+
+.project-snapshots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.project-snapshots figure {
+  margin: 0;
+  overflow: hidden;
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.project-snapshots a {
+  display: block;
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+.project-snapshots a:focus-visible {
+  outline-offset: -3px;
+}
+.project-snapshots img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.project-snapshots figcaption {
+  padding: .85rem 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .875rem;
+}
